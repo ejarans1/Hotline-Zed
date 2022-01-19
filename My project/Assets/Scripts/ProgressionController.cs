@@ -4,22 +4,14 @@ public class ProgressionController : MonoBehaviour
 {
 
     public bool levelClearedFlag = false;
-
-    public bool hasInteracted = false;
-
-    public GameObject objectToSpawn;
-
-    public GameObject enemyToSpawn;
-
+    public bool interactedServiceFlag = false;
+    public GameObject newBuildingPrefab;
+    public GameObject progressionOrbPrefab;
+    public GameObject enemyPrefab;
     public Transform player;
-    
     public Transform enemyGameObjectParents;
-
     public InteractableToProgressionService interactableToProgressionService;
-
-    public GameObject orbSpawnEnemy;
-
-    public GameObject oldBuildingSpawn;
+    private GameObject oldBuildingSpawn;
     public float spawnDistance = 10;
 
     // Start is called before the first frame update
@@ -30,40 +22,13 @@ public class ProgressionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        calculateLevelGatewayFlag();
+        calculateHasInteractedFlag();
         calculateLevelClearedFlag();
-
-        if(hasInteracted){
-            runLevelClearedActions();
-        }
-        
-        
-        
-
+        runLevelClearedActions();
     }
 
-    public void runLevelClearedActions(){
-        if(levelClearedFlag == true){
-            refreshLevel();
-        
-        }
-
-        if(levelClearedFlag == false){
-            return;
-        } 
-    }
-
-
-
-    public void calculateLevelGatewayFlag(){
-        interactableToProgressionService.getHasInteracted();
-    }
-    public void refreshLevel(){
-        Destroy(oldBuildingSpawn);
-        levelClearedFlag = false;
-        GameObject enemyToReparent = spawnNewEnemy();
-        oldBuildingSpawn = spawnNewBuilding();
-        enemyToReparent.transform.SetParent(enemyGameObjectParents);
+    public void calculateHasInteractedFlag(){
+        interactedServiceFlag = interactableToProgressionService.getHasInteracted();
     }
 
     public void calculateLevelClearedFlag(){
@@ -76,26 +41,56 @@ public class ProgressionController : MonoBehaviour
         }
     }
 
-    public GameObject spawnNewBuilding() {
+    public void runLevelClearedActions(){
+        if(levelClearedFlag && interactedServiceFlag){
+            refreshLevel();
+        
+        }
+
+        if(!levelClearedFlag){
+            return;
+        } 
+    }
+    
+    private void refreshLevel(){
+        Destroy(oldBuildingSpawn);
+        levelClearedFlag = false;
+        GameObject enemyToReparent = spawnNewEnemy();
+        GameObject refreshedInteractSphere = spawnNewInteractSphere();
+        oldBuildingSpawn = spawnNewBuilding();
+        enemyToReparent.transform.SetParent(enemyGameObjectParents);
+        interactableToProgressionService.setHasInteracted(false);
+        interactableToProgressionService.setInteractableObject(refreshedInteractSphere);
+    }
+
+    private GameObject spawnNewBuilding() {
         Quaternion playerRotation = player.transform.rotation;
         Vector3 playerPos = player.transform.position;
         Vector3 playerDirection = player.transform.forward;
-        
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
 
-        return Instantiate(objectToSpawn, spawnPos, playerRotation);
+        return Instantiate(newBuildingPrefab, spawnPos, playerRotation);
         
     }
 
-    public GameObject spawnNewEnemy() {
+    private GameObject spawnNewEnemy() {
         Quaternion playerRotation = player.transform.rotation;
         Vector3 playerPos = player.transform.position;
         Vector3 playerDirection = player.transform.forward;
         
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
 
-        return Instantiate(enemyToSpawn, spawnPos, playerRotation);
+        return Instantiate(enemyPrefab, spawnPos, playerRotation);
         
+    }
+    private GameObject spawnNewInteractSphere(){
+        Quaternion playerRotation = player.transform.rotation;
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerDirection = player.transform.forward;
+        
+        Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
+
+        return Instantiate(newBuildingPrefab, spawnPos, playerRotation);
     }
 
     public bool getLevelClearedFlag(){

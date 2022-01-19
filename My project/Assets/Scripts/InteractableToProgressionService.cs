@@ -15,6 +15,7 @@ public class InteractableToProgressionService : MonoBehaviour
     public float interactRange;
 
     public bool hasInteracted = false;
+    
     public LayerMask itemLayers;
     void Start()
     {
@@ -26,14 +27,23 @@ public class InteractableToProgressionService : MonoBehaviour
     {
         if (controller.getLevelClearedFlag() == true){
             Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
-            hasInteracted = true;
+            
             foreach(Collider enemy in playerSphereColliders){
                 Destroy(interactableObject.gameObject);
+                hasInteracted = true;
             }
         }
     }
 
     public bool getHasInteracted(){
         return hasInteracted;
+    }
+
+    public void setHasInteracted(bool valueToSet){
+        hasInteracted = valueToSet;
+    }
+
+    public void setInteractableObject(GameObject newInteractableObject){
+        interactableObject = newInteractableObject.transform;
     }
 }
