@@ -36,12 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Environmental\LocationSpawner.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\Gravity.cs" />
      <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\GUIControls.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerMachineDebug.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\InstantActionHandler.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterAnimatorEvents.cs" />
      <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Environmental\EnvironmentSpawner.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterInputController.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Character\Attack.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Null.cs" />
@@ -50,6 +52,7 @@
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\SimpleStateMachine.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Idle.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Knockback.cs" />
+     <Compile Include="Assets\Scripts\PlayerBehavior\AnimationControllerScript.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\IKHands.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerMachine.cs" />
      <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\HighJumpTrampoline.cs" />
@@ -60,9 +63,11 @@
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Jump.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Weapon\SwitchWeapon.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BSPTree.cs" />
+     <Compile Include="Assets\Scripts\PlayerBehavior\AnimationController.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperMath.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Fall.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\DiveRoll.cs" />
+     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerController.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCollider.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerInputController.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\MovementActionHandler.cs" />
@@ -70,25 +75,20 @@
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerCamera.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\DebugDraw.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Character\SlowTime.cs" />
+     <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\Services\InteractableToProgressionService.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Navigation.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BruteForceMesh.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\CoroutineQueue.cs" />
+     <Compile Include="Assets\Scripts\Services\ProgressionController.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\GetHit.cs" />
+     <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterWeaponController.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\SimpleActionHandler.cs" />
      <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\NoJumpSlime.cs" />
      <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCharacterController.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\ActionHandler.cs" />
      <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterController.cs" />
-     <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
-     <Compile Include="Assets\Scripts\PlayerBehavior\AnimationControllerScript.cs" />
-     <Compile Include="Assets\Scripts\PlayerBehavior\AnimationController.cs" />
-     <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAI.cs" />
-     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Services\InteractableToProgressionService.cs" />
-     <Compile Include="Assets\Scripts\Services\ProgressionController.cs" />
-     <Compile Include="Assets\Scripts\Environmental\EnvironmentSpawner.cs" />
-     <Compile Include="Assets\Scripts\Environmental\LocationSpawner.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne_License.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -109,6 +109,7 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\FPS\Third-PartyNotice.txt" />
+     <None Include="Assets\Customizable Skybox\Stylized Sky\Shaders\Stylized Sky.shader" />
      <None Include="Assets\Baseball Bats\Documentation\Documentation.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
