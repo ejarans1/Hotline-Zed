@@ -54,7 +54,7 @@ public class ProgressionController : MonoBehaviour
         Destroy(oldBuildingSpawn);
         Destroy(progressionOrbInstance);
         levelClearedFlag = false;
-        Transform spawnPointToSpawn = locationSpawner.returnRandomSpawnPoint();
+        Transform spawnPointToSpawn = locationSpawner.returnOrderedSpawnPoint();
         GameObject enemyToReparent = spawnNewEnemy(spawnPointToSpawn);
         progressionOrbInstance = setProgressionControllerViaResource(spawnPointToSpawn);
         oldBuildingSpawn = spawnNewBuilding(spawnPointToSpawn);

@@ -14,6 +14,11 @@ public class LocationSpawner : MonoBehaviour
 
     public Transform spawnPoint4;
 
+    public int spawnPointOrderTracker = -1;
+
+    public bool increaseDecreased = false;
+    
+
     List<Transform> spawnPointList;
     void Start()
     {
@@ -30,8 +35,29 @@ public class LocationSpawner : MonoBehaviour
         
     }
 
-    public Transform returnRandomSpawnPoint(){
-        int num = Random.Range(0,4); 
-        return spawnPointList[num];
+    public Transform returnOrderedSpawnPoint(){
+        
+        if (spawnPointOrderTracker == 3){
+            increaseDecreased = true;
+            spawnPointOrderTracker--;
+            return spawnPointList[spawnPointOrderTracker];
+        }
+        if (spawnPointOrderTracker == 0){
+            increaseDecreased = false;
+            spawnPointOrderTracker++;
+            return spawnPointList[spawnPointOrderTracker];
+        }
+
+        if (increaseDecreased){
+            spawnPointOrderTracker--;
+            return spawnPointList[spawnPointOrderTracker];
+        } else {
+            spawnPointOrderTracker++;
+            return spawnPointList[spawnPointOrderTracker];
+        }
+
+        
+
+    
     }
 }
