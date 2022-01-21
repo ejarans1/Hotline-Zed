@@ -7,6 +7,7 @@ public class ProgressionController : MonoBehaviour
     public bool interactedServiceFlag = false;
     public GameObject newBuildingPrefab;
     public GameObject progressionOrbPrefab;
+    public GameObject progressionOrbInstance;
     public GameObject enemyPrefab;
     public Transform player;
     public Transform enemyGameObjectParents;
@@ -23,13 +24,8 @@ public class ProgressionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        calculateHasInteractedFlag();
         calculateLevelClearedFlag();
         runLevelClearedActions();
-    }
-
-    public void calculateHasInteractedFlag(){
-        interactedServiceFlag = interactableToProgressionService.getHasInteracted();
     }
 
     public void calculateLevelClearedFlag(){
@@ -45,6 +41,7 @@ public class ProgressionController : MonoBehaviour
     public void runLevelClearedActions(){
         if(levelClearedFlag && interactedServiceFlag){
             refreshLevel();
+            interactedServiceFlag = false;
         
         }
 
@@ -55,14 +52,14 @@ public class ProgressionController : MonoBehaviour
     
     private void refreshLevel(){
         Destroy(oldBuildingSpawn);
+        Destroy(progressionOrbInstance);
         levelClearedFlag = false;
         Transform spawnPointToSpawn = locationSpawner.returnRandomSpawnPoint();
         GameObject enemyToReparent = spawnNewEnemy(spawnPointToSpawn);
-        GameObject refreshedInteractSphere = spawnNewInteractSphere(spawnPointToSpawn);
+        progressionOrbInstance = setProgressionControllerViaResource(spawnPointToSpawn);
         oldBuildingSpawn = spawnNewBuilding(spawnPointToSpawn);
         enemyToReparent.transform.SetParent(enemyGameObjectParents);
-        interactableToProgressionService.setHasInteracted(false);
-        interactableToProgressionService.setInteractableObject(refreshedInteractSphere);
+        interactableToProgressionService.setInteractableObject(progressionOrbInstance);
     }
 
     private GameObject spawnNewBuilding(Transform spawnPoint) {
@@ -81,7 +78,25 @@ public class ProgressionController : MonoBehaviour
         return Instantiate(progressionOrbPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
-    public bool getLevelClearedFlag(){
+    public bool GetLevelClearedFlag(){
         return levelClearedFlag;
+    }
+
+    public void SetInteractedServiceFlag(bool hasInteracted){
+        interactedServiceFlag = hasInteracted;
+    }
+
+    public GameObject setProgressionControllerViaResource(Transform spawnPoint){
+        GameObject interacterSpawn = Instantiate(progressionOrbPrefab, spawnPoint.position, spawnPoint.rotation);
+        // Get
+        Interacter newInteracter = (Interacter)interacterSpawn.GetComponent(typeof(Interacter));
+        newInteracter.setProgressionController(this);
+        newInteracter.setInteractorService(interactableToProgressionService);
+        newInteracter.setPlayer(player);
+        newInteracter.setLayerMask();
+        newInteracter.setHasInteracted(false);
+        interactableToProgressionService.setInteractor(newInteracter);
+
+        return interacterSpawn;
     }
 }
