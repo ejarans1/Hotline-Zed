@@ -21,7 +21,7 @@ public float MinDist = 5;
  {
      transform.LookAt(Player);
      
-     if(Vector3.Distance(transform.position,Player.position) >= MinDist){
+     if(Vector3.Distance(transform.position,Player.position) >= MinDist && Vector3.Distance(transform.position,Player.position) <= MaxDist ){
      
           transform.position += transform.forward*MoveSpeed*Time.deltaTime;
  
@@ -29,7 +29,7 @@ public float MinDist = 5;
            
           if(Vector3.Distance(transform.position,Player.position) <= MaxDist)
               {
-                 //Here Call any function U want Like Shoot at here or something
+            
     } 
     
     }
