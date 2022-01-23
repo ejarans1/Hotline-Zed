@@ -18,17 +18,24 @@ public class PlayerController : MonoBehaviour {
     public float mainSpeed = 12.5f; //regular speed
     public float shiftAdd = 250.0f; //multiplied by how long shift is held.  Basically running
     public float maxShift = 1000.0f; //Maximum speed when holdin gshift
-    
-    public float maxDistance = -25;
-    public float minDistance = 25 ;
+    public float negativeXLimit = -25;
+    public float positiveXLimit = 25 ;
+    public float negativeYLimit = -25;
+    public float positiveYLimit = 25 ;
+    public float negativeZLimit = -25;
+    public float positiveZLimit = 25 ;
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun= 1.0f;
-
     public float camSens = 0.25f; //How sensitive it with mouse
 
-    private bool invisibleWallFlagEast = true;
+    private bool invisWallPositiveXFlag = true;
+    private bool invisWallNegativeXFlag = true;
 
-    private bool invisibleWallFlagWest = true;
+    private bool invisWallPositiveYFlag = true;
+    private bool invisWallNegativeYFlag = true;
+
+    private bool invisWallPositiveZFlag = true;
+    private bool invisWallNegativeZFlag = true;
     public Animator animator;
 
     public AttackController attackController;
@@ -44,13 +51,27 @@ public class PlayerController : MonoBehaviour {
     
     
     void Update () {
-        CalculateInvisibleWallPointWest();
-        CalculateInvisibleWallPointEast();
-        //updateMousePosition();
+        calculateInvisibleWallViolations();
         updatePlayerAnimation();
+        applyForce();
+        updatePlayerCameraPositionAndRotation();
+        invisibleWallCheck();
+    }
+
+
+    private void applyForce(){
         Vector3 p = GetBaseInput();
-        if (p.sqrMagnitude > 0){ // only move while a direction key is pressed
-          if (Input.GetKey (KeyCode.LeftShift)){
+        // if (p.sqrMagnitude > 0){ // only move while a direction key is pressed
+        //   p = calculateSpeed(p);
+        //   p = p * Time.deltaTime;
+        //   Vector3 cameraForward = cameraPosition.transform.forward;
+        //   invisibleWallCheck();
+        //   playerRigidBody.AddForce (p);
+        // }
+    }
+
+    private Vector3 calculateSpeed(Vector3 p){
+        if (Input.GetKey (KeyCode.LeftShift)){
               totalRun += Time.deltaTime;
               p  = p * totalRun * shiftAdd;
               p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
@@ -60,30 +81,21 @@ public class PlayerController : MonoBehaviour {
               totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
               p = p * mainSpeed;
           }
-         
-          p = p * Time.deltaTime;
-          if (!invisibleWallFlagEast) {
-              transform.position = playerSpawnPoint.position;
-              updatePlayerCameraPositionAndRotation();
-          }
-          if (!invisibleWallFlagWest) {
-                transform.position = playerSpawnPoint.position;
-                updatePlayerCameraPositionAndRotation();
-          }
-          float horizontalAxis = Input.GetAxis("Horizontal"); // Your X axis A and D keys
-          float verticalAxis = Input.GetAxis("Vertical"); // Your Z axis W and S keys
-          // Create force vector with 0 y and apply it to your rb
-          playerRigidBody.AddForce (p);
-        
-        }
-        updatePlayerCameraPositionAndRotation();
-        invisibleWallCheck();
+          return p;
     }
 
     void LateUpdate(){
 
     }
 
+    private void calculateInvisibleWallViolations(){
+        CalculateInvisibleWallNegativeX();
+        CalculateInvisibleWallPositiveX();
+        CalculateInvisibleWallPositiveY();
+        CalculateInvisibleWallNegativeY();
+        CalculateInvisibleWallPositiveZ();
+        CalculateInvisibleWallNegativeZ();
+    }
 
     private void updateMousePosition(){
         lastMouse = Input.mousePosition - lastMouse ;
@@ -94,11 +106,27 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void invisibleWallCheck(){
-        if (!invisibleWallFlagEast) {
+        if (!invisWallPositiveXFlag) {
               transform.position = playerSpawnPoint.position;
               updatePlayerCameraPositionAndRotation();
           }
-          if (!invisibleWallFlagWest) {
+          if (!invisWallNegativeXFlag) {
+                transform.position = playerSpawnPoint.position;
+                updatePlayerCameraPositionAndRotation();
+          }
+          if (!invisWallPositiveYFlag) {
+              transform.position = playerSpawnPoint.position;
+              updatePlayerCameraPositionAndRotation();
+          }
+          if (!invisWallNegativeYFlag) {
+                transform.position = playerSpawnPoint.position;
+                updatePlayerCameraPositionAndRotation();
+          }
+          if (!invisWallPositiveZFlag) {
+              transform.position = playerSpawnPoint.position;
+              updatePlayerCameraPositionAndRotation();
+          }
+          if (!invisWallNegativeZFlag) {
                 transform.position = playerSpawnPoint.position;
                 updatePlayerCameraPositionAndRotation();
           }
@@ -128,17 +156,19 @@ public class PlayerController : MonoBehaviour {
     private Vector3 GetBaseInput() { //returns the basic values, if it's 0 than it's not active.
         Vector3 p_Velocity = new Vector3();
         if (Input.GetKey (KeyCode.W)){
-            playerRigidBody.AddForce(0,0,10);
+            Vector3 cameraForward = cameraPosition.transform.forward;
+            playerRigidBody.AddForce(cameraForward);
         }
         if (Input.GetKey (KeyCode.S)){
-            playerRigidBody.AddForce(0,0,-10);
+            Vector3 cameraBackward = -cameraPosition.transform.forward;
+            playerRigidBody.AddForce(cameraBackward);
         }
         if (Input.GetKey (KeyCode.A)){
-            playerRigidBody.AddForce(-10,0,0);
+            playerRigidBody.AddForce(-1,0,0);
             
         }
         if (Input.GetKey (KeyCode.D)){
-            playerRigidBody.AddForce(10,0,0);
+            playerRigidBody.AddForce(1,0,0);
         }
         return p_Velocity;
     }
@@ -155,20 +185,54 @@ public class PlayerController : MonoBehaviour {
 
 
 
-    private void CalculateInvisibleWallPointEast(){
-        if(gameObject.transform.position.x >= maxDistance){
+    private void CalculateInvisibleWallPositiveX(){
+        if(gameObject.transform.position.x >= negativeXLimit){
             Debug.Log(gameObject.transform.position.x);
-            invisibleWallFlagEast = true;
+            invisWallPositiveXFlag = true;
         } else {
-            invisibleWallFlagEast = false;
+            invisWallPositiveXFlag = false;
         }
     }
-    private void CalculateInvisibleWallPointWest(){
-        if(gameObject.transform.position.x <= minDistance){
+    private void CalculateInvisibleWallNegativeX(){
+        if(gameObject.transform.position.x <= positiveXLimit){
             Debug.Log(gameObject.transform.position.x);
-            invisibleWallFlagWest = true;
+            invisWallNegativeXFlag = true;
         } else {
-            invisibleWallFlagWest = false;
+            invisWallNegativeXFlag = false;
+        }
+    }
+
+    private void CalculateInvisibleWallPositiveY(){
+        if(gameObject.transform.position.y >= negativeYLimit){
+            Debug.Log(gameObject.transform.position.y);
+            invisWallPositiveYFlag = true;
+        } else {
+            invisWallPositiveYFlag = false;
+        }
+    }
+    private void CalculateInvisibleWallNegativeY(){
+        if(gameObject.transform.position.y <= positiveYLimit){
+            Debug.Log(gameObject.transform.position.y);
+            invisWallNegativeYFlag = true;
+        } else {
+            invisWallNegativeYFlag = false;
+        }
+    }
+
+    private void CalculateInvisibleWallPositiveZ(){
+        if(gameObject.transform.position.z >= negativeZLimit){
+            Debug.Log(gameObject.transform.position.z);
+            invisWallPositiveZFlag = true;
+        } else {
+            invisWallPositiveZFlag = false;
+        }
+    }
+    private void CalculateInvisibleWallNegativeZ(){
+        if(gameObject.transform.position.z <= positiveZLimit){
+            Debug.Log(gameObject.transform.position.z);
+            invisWallNegativeZFlag = true;
+        } else {
+            invisWallNegativeZFlag = false;
         }
     }
 
