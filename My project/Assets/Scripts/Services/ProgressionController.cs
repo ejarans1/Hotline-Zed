@@ -12,6 +12,7 @@ public class ProgressionController : MonoBehaviour
     public Transform player;
     public Transform enemyGameObjectParents;
     public InteractableToProgressionService interactableToProgressionService;
+    public ProceduralEnvironmentGenerationService proceduralEnvironmentGenerationService;
     public LocationSpawner locationSpawner;
     private GameObject oldBuildingSpawn;
     public float spawnDistance = 10;
@@ -41,6 +42,7 @@ public class ProgressionController : MonoBehaviour
     public void runLevelClearedActions(){
         if(levelClearedFlag && interactedServiceFlag){
             refreshLevel();
+            proceduralEnvironmentGenerationService.triggerProceduralGenerationStep();
             interactedServiceFlag = false;
         
         }
