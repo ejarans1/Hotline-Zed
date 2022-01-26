@@ -10,9 +10,21 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
 
     public Transform environmentParent;
 
+    public GameObject initialGameTile;
+
     bool generateNewPlatFormFlag = false;
 
-    float speed;
+    bool rollPlatformFlag = false;
+
+    public Transform spawnPoint1;
+
+    Transform spawnPosition;
+    GameObject prefabToUse;
+    GameObject generatedPrefab;
+
+    float speed = 15;
+    float startTime;
+    float journeyLength;
 
 
         // Start is called before the first frame update
@@ -25,30 +37,28 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     void Update()
     {
         if (generateNewPlatFormFlag){
-            Transform spawnPosition = getSpawnPositions();
-            GameObject prefabToUse = proceduralPrefab;
-            GameObject generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, spawnPosition);
-            rollPlatformUpIntoView(generatedPrefab, spawnPosition);
-            generateNewPlatFormFlag = false;
+            spawnPosition = spawnPoint1;
+            prefabToUse = proceduralPrefab;
+            float x = spawnPoint1.transform.position.x;
+            float y = spawnPoint1.transform.position.y;
+            float z = spawnPoint1.transform.position.z;
+            generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, new Vector3(x+40, y-20, z));
+            EnvironmentTileMover environmentTileMoverOfGeneratedPrefab = generatedPrefab.GetComponent<EnvironmentTileMover>();
+            environmentTileMoverOfGeneratedPrefab.setPositionToMoveTowards(new Vector3(x+40, y, z));
+            environmentTileMoverOfGeneratedPrefab.triggerTileMovement();
+            generateNewPlatFormFlag = false;     
         }
-        
     }
-
-    private void rollPlatformUpIntoView(GameObject objectToMove, Transform spawnPosition){
-        float step = speed * Time.deltaTime;
-        objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, spawnPosition.position, step);
-    }
-    private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Transform spawnPosition){
-        GameObject gameObjectPrefab = Instantiate(prefabToUse, spawnPosition.position, spawnPosition.rotation);
-        Vector3 underLevelHeight = new Vector3(gameObjectPrefab.transform.position.x,
-                    gameObjectPrefab.transform.position.y-20, 
-                    gameObjectPrefab.transform.position.z);
-        gameObjectPrefab.transform.position = underLevelHeight; 
+    private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Vector3 spawnPosition){
+        float x = spawnPoint1.transform.position.x + 40;
+        float y = spawnPoint1.transform.position.y + -20;
+        float z = spawnPoint1.transform.position.z;
+        GameObject gameObjectPrefab = Instantiate(prefabToUse, new Vector3(x, y, z), spawnPoint1.rotation, environmentParent);
         return gameObjectPrefab;
     }
 
     private Transform getSpawnPositions(){
-        GameObject spawnLocationParent = proceduralPrefab.transform.Find("SpawnLocations").gameObject;
+        GameObject spawnLocationParent = initialGameTile.transform.Find("SpawnLocations").gameObject;
         List<Transform> spawnLocations = new List<Transform>();
         for (int i = 0; i < spawnLocationParent.transform.childCount; i++){
             spawnLocations.Add(spawnLocationParent.transform.GetChild(0));
