@@ -8,9 +8,6 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     public GameObject proceduralPrefab;
 
     public Transform environmentParent;
-
-    public GameObject initialGameTile;
-
     bool generateNewPlatFormFlag = false;
 
     bool rollPlatformFlag = false;
@@ -34,23 +31,32 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     {
         if (generateNewPlatFormFlag){
             generateNewPlatform();
-            updateServiceWithNewPlatformValues();
+            moveGeneratedTile(generatedPrefab);
+            linkGeneratedPrefabToProgressionController();
+            updateProceduralServiceWithNewPlatformValues();
             //Setup Connections Between New Object and Generation Service
         }
     }
 
-    private void updateServiceWithNewPlatformValues(){
-
+    private void updateProceduralServiceWithNewPlatformValues(){
+        currentTilePosition = generatedPrefab.transform;
+        //currentTilePosition.transform.position = generatePositionWithOffset(generatedPrefab.transform, 0, 0, 0);
     }
     private void generateNewPlatform(){
         generateNewPlatFormFlag = false; 
         prefabToUse = proceduralPrefab;
         generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, currentTilePosition);
+        
+    }
+
+    private void linkGeneratedPrefabToProgressionController(){
+        progressionController.SetSpawnOrb(generatedPrefab.transform.Find("InteractactableProgressionOrbInstance").gameObject);
+    }
+
+    private void moveGeneratedTile(GameObject prefabToMove){
         EnvironmentTileMover environmentTileMoverOfGeneratedPrefab = generatedPrefab.GetComponent<EnvironmentTileMover>();
         environmentTileMoverOfGeneratedPrefab.setPositionToMoveTowards(generatePositionWithOffset(currentTilePosition, 40, 0, 0));
         environmentTileMoverOfGeneratedPrefab.triggerTileMovement();
-        generatedPrefab.transform.Find("InteractactableProgressionOrbInstance");
-        progressionController.SetSpawnOrb(generatedPrefab.transform.Find("InteractactableProgressionOrbInstance").gameObject);
     }
     private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Transform  spawnPosition){
         Vector3 offsetPosition = generatePositionWithOffset(spawnPosition, 40, -20, 0);
@@ -63,15 +69,6 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         float y = originalPosition.transform.position.y + yOffset;
         float z = originalPosition.transform.position.z + zOffset;
         return new Vector3(x,y,z);
-    }
-
-    private Transform getSpawnPositions(){
-        GameObject spawnLocationParent = initialGameTile.transform.Find("SpawnLocations").gameObject;
-        List<Transform> spawnLocations = new List<Transform>();
-        for (int i = 0; i < spawnLocationParent.transform.childCount; i++){
-            spawnLocations.Add(spawnLocationParent.transform.GetChild(0));
-        }
-        return spawnLocations[(Random.Range(0, spawnLocations.Capacity))];
     }
 
     private GameObject getPreFabToUse(){
