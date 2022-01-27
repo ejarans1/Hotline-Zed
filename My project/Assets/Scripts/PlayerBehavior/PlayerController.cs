@@ -61,13 +61,6 @@ public class PlayerController : MonoBehaviour {
 
     private void applyForce(){
         Vector3 p = GetBaseInput();
-        // if (p.sqrMagnitude > 0){ // only move while a direction key is pressed
-        //   p = calculateSpeed(p);
-        //   p = p * Time.deltaTime;
-        //   Vector3 cameraForward = cameraPosition.transform.forward;
-        //   invisibleWallCheck();
-        //   playerRigidBody.AddForce (p);
-        // }
     }
 
     private Vector3 calculateSpeed(Vector3 p){

@@ -11,7 +11,6 @@ public class ProgressionController : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform player;
     public Transform enemyGameObjectParents;
-    public InteractableToProgressionService interactableToProgressionService;
     public ProceduralEnvironmentGenerationService proceduralEnvironmentGenerationService;
     public LocationSpawner locationSpawner;
     private GameObject oldBuildingSpawn;
@@ -28,6 +27,7 @@ public class ProgressionController : MonoBehaviour
         calculateLevelClearedFlag();
         runLevelClearedActions();
     }
+    
 
     public void calculateLevelClearedFlag(){
         if(enemyGameObjectParents.childCount == 0){
@@ -41,27 +41,14 @@ public class ProgressionController : MonoBehaviour
 
     public void runLevelClearedActions(){
         if(levelClearedFlag && interactedServiceFlag){
-            refreshLevel();
-            proceduralEnvironmentGenerationService.triggerProceduralGenerationStep();
             interactedServiceFlag = false;
-        
+            Destroy(progressionOrbInstance);
+            proceduralEnvironmentGenerationService.triggerProceduralGenerationStep();
         }
 
         if(!levelClearedFlag){
             return;
         } 
-    }
-    
-    private void refreshLevel(){
-        Destroy(oldBuildingSpawn);
-        Destroy(progressionOrbInstance);
-        levelClearedFlag = false;
-        Transform spawnPointToSpawn = locationSpawner.returnOrderedSpawnPoint();
-        GameObject enemyToReparent = spawnNewEnemy(spawnPointToSpawn);
-        progressionOrbInstance = setProgressionControllerViaResource(spawnPointToSpawn);
-        oldBuildingSpawn = spawnNewBuilding(spawnPointToSpawn);
-        enemyToReparent.transform.SetParent(enemyGameObjectParents);
-        interactableToProgressionService.setInteractableObject(progressionOrbInstance);
     }
 
     private GameObject spawnNewBuilding(Transform spawnPoint) {
@@ -88,17 +75,7 @@ public class ProgressionController : MonoBehaviour
         interactedServiceFlag = hasInteracted;
     }
 
-    public GameObject setProgressionControllerViaResource(Transform spawnPoint){
-        GameObject interacterSpawn = Instantiate(progressionOrbPrefab, spawnPoint.position, spawnPoint.rotation);
-        // Get
-        Interacter newInteracter = (Interacter)interacterSpawn.GetComponent(typeof(Interacter));
-        newInteracter.setProgressionController(this);
-        newInteracter.setInteractorService(interactableToProgressionService);
-        newInteracter.setPlayer(player);
-        newInteracter.setLayerMask();
-        newInteracter.setHasInteracted(false);
-        interactableToProgressionService.setInteractor(newInteracter);
-
-        return interacterSpawn;
+    public void SetSpawnOrb(GameObject newProgressionOrbInstance){
+        progressionOrbInstance = newProgressionOrbInstance;
     }
 }

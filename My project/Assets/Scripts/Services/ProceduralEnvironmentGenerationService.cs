@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ProceduralEnvironmentGenerationService : MonoBehaviour
 {
-    public GameObject proceduralController;
-
+    public ProgressionController progressionController;
     public GameObject proceduralPrefab;
 
     public Transform environmentParent;
@@ -16,12 +15,9 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
 
     bool rollPlatformFlag = false;
 
-    public Transform spawnPoint1;
-
-    Transform spawnPosition;
+    public Transform currentTilePosition;
     GameObject prefabToUse;
     GameObject generatedPrefab;
-
     float speed = 15;
     float startTime;
     float journeyLength;
@@ -37,24 +33,36 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     void Update()
     {
         if (generateNewPlatFormFlag){
-            spawnPosition = spawnPoint1;
-            prefabToUse = proceduralPrefab;
-            float x = spawnPoint1.transform.position.x;
-            float y = spawnPoint1.transform.position.y;
-            float z = spawnPoint1.transform.position.z;
-            generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, new Vector3(x+40, y-20, z));
-            EnvironmentTileMover environmentTileMoverOfGeneratedPrefab = generatedPrefab.GetComponent<EnvironmentTileMover>();
-            environmentTileMoverOfGeneratedPrefab.setPositionToMoveTowards(new Vector3(x+40, y, z));
-            environmentTileMoverOfGeneratedPrefab.triggerTileMovement();
-            generateNewPlatFormFlag = false;     
+            generateNewPlatform();
+            updateServiceWithNewPlatformValues();
+            //Setup Connections Between New Object and Generation Service
         }
     }
-    private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Vector3 spawnPosition){
-        float x = spawnPoint1.transform.position.x + 40;
-        float y = spawnPoint1.transform.position.y + -20;
-        float z = spawnPoint1.transform.position.z;
-        GameObject gameObjectPrefab = Instantiate(prefabToUse, new Vector3(x, y, z), spawnPoint1.rotation, environmentParent);
+
+    private void updateServiceWithNewPlatformValues(){
+
+    }
+    private void generateNewPlatform(){
+        generateNewPlatFormFlag = false; 
+        prefabToUse = proceduralPrefab;
+        generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, currentTilePosition);
+        EnvironmentTileMover environmentTileMoverOfGeneratedPrefab = generatedPrefab.GetComponent<EnvironmentTileMover>();
+        environmentTileMoverOfGeneratedPrefab.setPositionToMoveTowards(generatePositionWithOffset(currentTilePosition, 40, 0, 0));
+        environmentTileMoverOfGeneratedPrefab.triggerTileMovement();
+        generatedPrefab.transform.Find("InteractactableProgressionOrbInstance");
+        progressionController.SetSpawnOrb(generatedPrefab.transform.Find("InteractactableProgressionOrbInstance").gameObject);
+    }
+    private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Transform  spawnPosition){
+        Vector3 offsetPosition = generatePositionWithOffset(spawnPosition, 40, -20, 0);
+        GameObject gameObjectPrefab = Instantiate(prefabToUse, offsetPosition, spawnPosition.rotation, environmentParent);
         return gameObjectPrefab;
+    }
+
+    private Vector3 generatePositionWithOffset(Transform originalPosition, float xOffset, float yOffset, float zOffset){
+        float x = originalPosition.transform.position.x + xOffset;
+        float y = originalPosition.transform.position.y + yOffset;
+        float z = originalPosition.transform.position.z + zOffset;
+        return new Vector3(x,y,z);
     }
 
     private Transform getSpawnPositions(){
@@ -78,5 +86,9 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
 
     public void triggerProceduralGenerationStep(){
         generateNewPlatFormFlag = true;
+    }
+
+    public GameObject getCurrentTileGameObject(){
+        return generatedPrefab;
     }
 }

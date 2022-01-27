@@ -5,12 +5,13 @@ using UnityEngine;
 public class Interacter : MonoBehaviour
 {
 
-    public InteractableToProgressionService interactableToProgressionService;
     public ProgressionController progressionController;
     public Transform player;
     public bool hasInteracted = false;
     public float interactRange;
     public LayerMask itemLayers;
+
+    public GameObject instanceOrb;
 
 
     // Start is called before the first frame update
@@ -25,7 +26,10 @@ public class Interacter : MonoBehaviour
         if (progressionController.GetLevelClearedFlag() == true){
             Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
             foreach(Collider interactCollider in playerSphereColliders){
-                hasInteracted = true;
+                progressionController.SetInteractedServiceFlag(true);
+                
+                
+                
             }
         }
     }
@@ -41,9 +45,6 @@ public class Interacter : MonoBehaviour
     public void setProgressionController(ProgressionController progressionControllerService){
         progressionController = progressionControllerService;
     }
-    public void setInteractorService(InteractableToProgressionService interactService){
-        interactableToProgressionService = interactService;
-    }
 
     public void setPlayer(Transform existingPlayer){
         player = existingPlayer;
@@ -55,5 +56,5 @@ public class Interacter : MonoBehaviour
         
     }
 
-
+ 
 }
