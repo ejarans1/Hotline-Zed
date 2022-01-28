@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class ProceduralEnvironmentGenerationService : MonoBehaviour
 {
+    public EnvironmentTileTrackerService environmentTileTrackerService;
     public ProgressionController progressionController;
     public GameObject proceduralPrefab;
-
-    public Transform environmentParent;
-    bool generateNewPlatFormFlag = false;
-
-    bool rollPlatformFlag = false;
-
-    public Transform currentTilePosition;
     GameObject prefabToUse;
     GameObject generatedPrefab;
-    float speed = 15;
-    float startTime;
-    float journeyLength;
+    public Transform environmentParent;
+    public Transform currentTilePosition;
+    bool generateNewPlatFormFlag = false;
+    bool rollPlatformFlag = false;
 
+    enum Direction
+{
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST
+}
+    
 
-        // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (generateNewPlatFormFlag){
@@ -35,21 +36,89 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
             moveGeneratedTile(generatedPrefab);
             linkGeneratedPrefabToProgressionController();
             updateProceduralServiceWithNewPlatformValues();
-            //Setup Connections Between New Object and Generation Service
         }
     }
 
     private void updateProceduralServiceWithNewPlatformValues(){
         currentTilePosition = generatedPrefab.transform;
-        //currentTilePosition.transform.position = generatePositionWithOffset(generatedPrefab.transform, 0, 0, 0);
     }
     private void generateNewPlatform(Vector3 spawnPosition){
+        int currentXTilePosition = environmentTileTrackerService.getCurrentXTilePosition();
+        int currentYTilePosition = environmentTileTrackerService.getCurrentYTilePosition();
         generateNewPlatFormFlag = false; 
         prefabToUse = proceduralPrefab;
-        generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, spawnPosition, currentTilePosition);
+        generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, spawnPosition, currentTilePosition); 
+        updateTileTrackerServiceForTilePosition(currentXTilePosition, currentYTilePosition);
+        updateTileTrackerServiceMatrix(currentXTilePosition, currentYTilePosition);       
+
+    }
         
+    private void updateTileTrackerServiceMatrix(int xPosition, int yPosition){
+        environmentTileTrackerService.setMatrixValue(xPosition,yPosition);
     }
 
+    private void updateTileTrackerServiceForTilePosition(int xPosition, int yPosition){
+        Direction eastWestCalculation = calculateEastWestDirection();
+        Direction northSouthCalculation = calculateNorthSouthDirection();
+        int yAxisChange = calculateDirectionYAxisChange(northSouthCalculation);
+        int xAxisChange = calculateDirectionXAxisChange(eastWestCalculation);
+        int updatedXAxisPosition = xPosition + xAxisChange;
+        int updatedYAxisPosition = yPosition + yAxisChange;
+        environmentTileTrackerService.setMatrixValue(updatedXAxisPosition, updatedYAxisPosition);
+    }
+
+    private int calculateDirectionXAxisChange(Direction eastWest){
+        if (eastWest == Direction.EAST){
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    private int calculateDirectionYAxisChange(Direction northSouth){
+        if (northSouth == Direction.NORTH){
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    private Direction calculateEastWestDirection(){
+        return performPreTileComparisonForXAxis(currentTilePosition, generatedPrefab.transform);
+    }
+
+    private Direction performPreTileComparisonForXAxis (Transform initialTilePosition, Transform newTilePosition){
+        float initialXPosition = initialTilePosition.position.x;
+        float newXPosition = initialTilePosition.position.x;
+        float comparedXValue = initialXPosition - newXPosition;
+        if(comparedXValue > 0){
+            return Direction.EAST;
+        }
+        else {
+            return Direction.WEST;
+        }
+
+    }
+
+
+    private Direction calculateNorthSouthDirection(){
+        return performPreTileComparisonForYAxis(currentTilePosition, generatedPrefab.transform);
+    }
+
+    private Direction performPreTileComparisonForYAxis (Transform initialTilePosition, Transform newTilePosition){
+        float initialYPosition = initialTilePosition.position.y;
+        float newYPosition = initialTilePosition.position.y;
+        float comparedYValue = initialYPosition - newYPosition;
+        if(comparedYValue > 0){
+            return Direction.NORTH;
+        }
+        else {
+            return Direction.SOUTH;
+        }
+
+    }
     private void linkGeneratedPrefabToProgressionController(){
         progressionController.SetSpawnOrb(generatedPrefab.transform.Find("InteractactableProgressionOrbInstance").gameObject);
     }
@@ -98,5 +167,9 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
 
     public GameObject getCurrentTileGameObject(){
         return generatedPrefab;
+    }
+
+    private bool checkTileAvailability(int xAxis, int yAxis){
+        return environmentTileTrackerService.getMatrixValue(xAxis, yAxis);
     }
 }
