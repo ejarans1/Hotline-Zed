@@ -34,6 +34,9 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     public void performGenerationStep(){
         if (generateNewPlatFormFlag){
             generateNewPlatFormFlag = false;
+            int currentXTilePosition = environmentTileTrackerService.getCurrentXTilePosition();
+            int currentYTilePosition = environmentTileTrackerService.getCurrentYTilePosition();
+            environmentTileTrackerService.setMatrixValue(currentXTilePosition, currentYTilePosition);
             Vector3 spawnPosition = getSpawnPositions(currentTilePosition); 
             generateNewPlatform(spawnPosition);
             moveGeneratedTile(generatedPrefab);
@@ -49,10 +52,31 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     private void generateNewPlatform(Vector3 spawnPosition){
         int currentXTilePosition = environmentTileTrackerService.getCurrentXTilePosition();
         int currentYTilePosition = environmentTileTrackerService.getCurrentYTilePosition();
-        generatedPrefab = generatePreFabAtSpawnPosition(proceduralPrefab, spawnPosition, currentTilePosition); 
+        generateTillSuccessful(currentYTilePosition, currentXTilePosition,spawnPosition);
         updateTileTrackerServiceForTilePosition(currentXTilePosition, currentYTilePosition);
         updateTileTrackerServiceMatrix(currentXTilePosition, currentYTilePosition);       
+    }
 
+    private void generateTillSuccessful(int currentY, int currentX, Vector3 spawnPosition){
+        bool isValidFlag = false;
+        while(!isValidFlag){
+            generatedPrefab = generatePreFabAtSpawnPosition(proceduralPrefab, spawnPosition, currentTilePosition);
+            updateTileTrackerServiceForTilePosition(currentX, currentY);
+            updateTileTrackerServiceMatrix(currentX, currentY);
+            if (calculateValidPosition(currentX, currentY) == true){
+                isValidFlag = false; 
+                Destroy(generatedPrefab);
+            }
+            else {
+                isValidFlag = true;
+            }  
+        }
+    
+    }
+
+    private bool checkForValidPosition(int xPosition, int yPosition){
+        return checkTileAvailability(xPosition, yPosition);
+        
     }
         
     private void updateTileTrackerServiceMatrix(int xPosition, int yPosition){
@@ -67,6 +91,17 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         int updatedXAxisPosition = xPosition + xAxisChange;
         int updatedYAxisPosition = yPosition + yAxisChange;
         environmentTileTrackerService.setMatrixValue(updatedXAxisPosition, updatedYAxisPosition);
+    }
+
+    private bool calculateValidPosition(int xPosition, int yPosition){
+        Direction eastWestCalculation = calculateEastWestDirection();
+        Direction northSouthCalculation = calculateNorthSouthDirection();
+        int yAxisChange = calculateDirectionYAxisChange(northSouthCalculation);
+        int xAxisChange = calculateDirectionXAxisChange(eastWestCalculation);
+        int updatedXAxisPosition = xPosition + xAxisChange;
+        int updatedYAxisPosition = yPosition + yAxisChange;
+        bool isMatrixValueOccupied = environmentTileTrackerService.getMatrixValue(updatedXAxisPosition, updatedYAxisPosition);
+        return isMatrixValueOccupied;
     }
 
     private int calculateDirectionXAxisChange(Direction eastWest){
