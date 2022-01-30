@@ -5,6 +5,8 @@ using UnityEngine;
 public class ProceduralEnvironmentGenerationService : MonoBehaviour
 {
     public EnvironmentTileTrackerService environmentTileTrackerService;
+
+    public RandomPrefabService randomPrefabService;
     public ProgressionController progressionController;
     public GameObject proceduralPrefab;
     GameObject generatedPrefab;
@@ -12,6 +14,8 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     public Transform currentTilePosition;
     bool generateNewPlatFormFlag = false;
     bool rollPlatformFlag = false;
+
+
 
     enum Direction
 {
@@ -60,6 +64,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     private void generateTillSuccessful(int currentY, int currentX, Vector3 spawnPosition){
         bool isValidFlag = false;
         while(!isValidFlag){
+            proceduralPrefab = randomPrefabService.getRandomPrefab();
             generatedPrefab = generatePreFabAtSpawnPosition(proceduralPrefab, spawnPosition, currentTilePosition);
             updateTileTrackerServiceForTilePosition(currentX, currentY);
             updateTileTrackerServiceMatrix(currentX, currentY);
@@ -72,6 +77,10 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
             }  
         }
     
+    }
+
+    private GameObject randomizeTilePrefab(){
+        return randomPrefabService.getRandomPrefab();
     }
 
     private bool checkForValidPosition(int xPosition, int yPosition){
@@ -186,16 +195,6 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         spawnLocations.Add(generatePositionWithOffset(originalPosition, 0, -20, 40));
         
         return spawnLocations[(Random.Range(0, spawnLocations.Capacity))];
-    }
-
-    private GameObject getPreFabToUse(){
-       GameObject preFabsParent = proceduralPrefab.transform.Find("PreFabs").gameObject;
-        List<GameObject> prefabPositions = new List<GameObject>();
-        for (int i = 0; i < preFabsParent.transform.childCount; i++){
-            prefabPositions.Add(preFabsParent.transform.GetChild(0).gameObject);
-        } 
-        return prefabPositions[(Random.Range(0, prefabPositions.Capacity))];
-        
     }
 
     public void triggerProceduralGenerationStep(){

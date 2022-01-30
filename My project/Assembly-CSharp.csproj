@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\FlickerLight.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\UVOffset.cs" />
+     <Compile Include="Assets\Scripts\Services\RandomPrefabService.cs" />
      <None Include="Assets\Lowpoly Style\Shared Materials and Textures\Water\Third-Party Notice.txt" />
      <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
      <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
@@ -691,6 +692,12 @@
     </Reference>
     <Reference Include="Unity.InteractiveTutorials.Core.Scripts">
         <HintPath>C:\Users\etjar\Documents\GitHub\miniature-enigma\My project\Library\ScriptAssemblies\Unity.InteractiveTutorials.Core.Scripts.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+        <HintPath>C:\Users\etjar\Documents\GitHub\miniature-enigma\My project\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+        <HintPath>C:\Users\etjar\Documents\GitHub\miniature-enigma\My project\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
