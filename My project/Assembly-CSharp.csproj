@@ -37,94 +37,25 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Environmental\LocationSpawner.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\Gravity.cs" />
-     <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\GUIControls.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerMachineDebug.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\InstantActionHandler.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterAnimatorEvents.cs" />
-     <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\CameraController.cs" />
      <Compile Include="Assets\Scripts\Environmental\EnvironmentSpawner.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterInputController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Character\Attack.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Null.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperStateMachine.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterMovementController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\SimpleStateMachine.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Idle.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Knockback.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\AnimationControllerScript.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\IKHands.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerMachine.cs" />
-     <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\HighJumpTrampoline.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCollisionType.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Math3d.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\AnimationData.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterNavigationController.cs" />
      <Compile Include="Assets\Scripts\Services\EnvironmentTileMover.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Jump.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Weapon\SwitchWeapon.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BSPTree.cs" />
-     <Compile Include="Assets\Scripts\PlayerBehavior\AnimationController.cs" />
      <Compile Include="Assets\Scripts\Services\CameraToPlayerService.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperMath.cs" />
      <Compile Include="Assets\Scripts\Services\ProceduralEnvironmentGenerationService.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Fall.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\DiveRoll.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\PlayerController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCollider.cs" />
-     <Compile Include="Assets\BrokenVector\LowPolyFencePack\Scripts\DoorToggle.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerInputController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\MovementActionHandler.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Move.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\Code\PlayerCamera.cs" />
-     <Compile Include="Assets\BrokenVector\LowPolyFencePack\Scripts\DoorController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\DebugDraw.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Character\SlowTime.cs" />
+     <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorToggle.cs" />
+     <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorController.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAI.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\Navigation.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BruteForceMesh.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\CoroutineQueue.cs" />
      <Compile Include="Assets\Scripts\Services\ProgressionController.cs" />
      <Compile Include="Assets\Scripts\Services\Interacter.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\Movement\GetHit.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterWeaponController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\SimpleActionHandler.cs" />
-     <Compile Include="Assets\ExplosiveLLC\Demo Elements\Code\NoJumpSlime.cs" />
-     <Compile Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCharacterController.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\Actions\ActionHandler.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack FREE\Code\RPGCharacterController.cs" />
      <Compile Include="Assets\Scripts\Services\EnvironmentTileTrackerService.cs" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne_License.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-     <None Include="Assets\FPS\Prefabs\PBObjects\_ReadMe_PBObjects.txt" />
-     <None Include="Assets\FPS\Art\Fonts\ApacheLicense2.0.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\FPS\Art\Shaders\ProjectorMultiply.shader" />
-     <None Include="Assets\FPS\Prefabs\RootObjects\_ReadMe_RootObjects.txt" />
-     <None Include="Assets\FPS\FPSMicrogame_README.txt" />
-     <None Include="Assets\FPS\Prefabs\Level\BaseObjects\_ReadMe_BaseObjects.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\BrokenVector\LowPolyTreePack\README.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\FPS\Third-PartyNotice.txt" />
-     <None Include="Assets\Customizable Skybox\Stylized Sky\Shaders\Stylized Sky.shader" />
+     <Compile Include="Assets\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
+     <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
+     <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
+     <None Include="Assets\Trees\LowPolyTreePack\README.txt" />
+     <None Include="Assets\Skyboxes\Stylized Sky\Shaders\Stylized Sky.shader" />
      <None Include="Assets\Baseball Bats\Documentation\Documentation.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-     <None Include="Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\README.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -760,42 +691,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="fps.UI.csproj">
-      <Project>{e59148c0-dfc1-de49-62eb-34134fcbf29d}</Project>
-      <Name>fps.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.Editor.csproj">
-      <Project>{5c01482c-428d-49d4-da69-b4d42a5de990}</Project>
-      <Name>fps.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.AI.csproj">
-      <Project>{4c0a0118-a87f-4b15-cace-db147bcc6164}</Project>
-      <Name>fps.AI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Microgame.Tutorials.csproj">
-      <Project>{f12dcdb0-6921-e06e-969a-eb3411485dd1}</Project>
-      <Name>Unity.Microgame.Tutorials</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.FPS.Tutorials.csproj">
-      <Project>{31c36917-3084-24ed-f8ee-c76347f8c340}</Project>
-      <Name>Unity.FPS.Tutorials</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{7347f028-2f43-a7d4-16e8-3af0d7371906}</Project>
-      <Name>NavMeshComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{51738f8e-107d-33f6-3615-514ebda6502e}</Project>
-      <Name>NavMeshComponentsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.Game.csproj">
-      <Project>{b957aada-34c8-b452-4833-7d5dcdafc164}</Project>
-      <Name>fps.Game</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.Gameplay.csproj">
-      <Project>{0e9d55cf-40aa-a380-d318-cb66df5406e5}</Project>
-      <Name>fps.Gameplay</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

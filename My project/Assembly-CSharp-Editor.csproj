@@ -36,7 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\ExplosiveLLC\Editor\SetupInputLayers.cs" />
+     <Compile Include="Assets\LowPolyWater_Pack\Scripts\Editor\GeneratePlane.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -708,42 +708,6 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{e6bdc332-25e1-2831-82c1-25d0441455a3}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.UI.csproj">
-      <Project>{e59148c0-dfc1-de49-62eb-34134fcbf29d}</Project>
-      <Name>fps.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.Editor.csproj">
-      <Project>{5c01482c-428d-49d4-da69-b4d42a5de990}</Project>
-      <Name>fps.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.AI.csproj">
-      <Project>{4c0a0118-a87f-4b15-cace-db147bcc6164}</Project>
-      <Name>fps.AI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Microgame.Tutorials.csproj">
-      <Project>{f12dcdb0-6921-e06e-969a-eb3411485dd1}</Project>
-      <Name>Unity.Microgame.Tutorials</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.FPS.Tutorials.csproj">
-      <Project>{31c36917-3084-24ed-f8ee-c76347f8c340}</Project>
-      <Name>Unity.FPS.Tutorials</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{7347f028-2f43-a7d4-16e8-3af0d7371906}</Project>
-      <Name>NavMeshComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{51738f8e-107d-33f6-3615-514ebda6502e}</Project>
-      <Name>NavMeshComponentsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.Game.csproj">
-      <Project>{b957aada-34c8-b452-4833-7d5dcdafc164}</Project>
-      <Name>fps.Game</Name>
-    </ProjectReference>
-    <ProjectReference Include="fps.Gameplay.csproj">
-      <Project>{0e9d55cf-40aa-a380-d318-cb66df5406e5}</Project>
-      <Name>fps.Gameplay</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -22,7 +22,7 @@ public class ProgressionController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         calculateLevelClearedFlag();
         runLevelClearedActions();
@@ -44,6 +44,8 @@ public class ProgressionController : MonoBehaviour
             interactedServiceFlag = false;
             Destroy(progressionOrbInstance);
             proceduralEnvironmentGenerationService.triggerProceduralGenerationStep();
+            Debug.Log("in run lvl cleared");
+            proceduralEnvironmentGenerationService.performGenerationStep();
         }
 
         if(!levelClearedFlag){
@@ -61,10 +63,6 @@ public class ProgressionController : MonoBehaviour
     
         return Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         
-    }
-    private GameObject spawnNewInteractSphere(Transform spawnPoint){
-        
-        return Instantiate(progressionOrbPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
     public bool GetLevelClearedFlag(){

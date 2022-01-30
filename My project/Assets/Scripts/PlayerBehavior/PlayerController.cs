@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour {
 
     private void CalculateInvisibleWallPositiveX(){
         if(gameObject.transform.position.x >= negativeXLimit){
-            Debug.Log(gameObject.transform.position.x);
+            //Debug.Log(gameObject.transform.position.x);
             invisWallPositiveXFlag = true;
         } else {
             invisWallPositiveXFlag = false;
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void CalculateInvisibleWallNegativeX(){
         if(gameObject.transform.position.x <= positiveXLimit){
-            Debug.Log(gameObject.transform.position.x);
+            //Debug.Log(gameObject.transform.position.x);
             invisWallNegativeXFlag = true;
         } else {
             invisWallNegativeXFlag = false;
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour {
 
     private void CalculateInvisibleWallPositiveY(){
         if(gameObject.transform.position.y >= negativeYLimit){
-            Debug.Log(gameObject.transform.position.y);
+            //Debug.Log(gameObject.transform.position.y);
             invisWallPositiveYFlag = true;
         } else {
             invisWallPositiveYFlag = false;
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void CalculateInvisibleWallNegativeY(){
         if(gameObject.transform.position.y <= positiveYLimit){
-            Debug.Log(gameObject.transform.position.y);
+            //Debug.Log(gameObject.transform.position.y);
             invisWallNegativeYFlag = true;
         } else {
             invisWallNegativeYFlag = false;
@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour {
 
     private void CalculateInvisibleWallPositiveZ(){
         if(gameObject.transform.position.z >= negativeZLimit){
-            Debug.Log(gameObject.transform.position.z);
+            //Debug.Log(gameObject.transform.position.z);
             invisWallPositiveZFlag = true;
         } else {
             invisWallPositiveZFlag = false;
@@ -222,7 +222,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void CalculateInvisibleWallNegativeZ(){
         if(gameObject.transform.position.z <= positiveZLimit){
-            Debug.Log(gameObject.transform.position.z);
+            //Debug.Log(gameObject.transform.position.z);
             invisWallNegativeZFlag = true;
         } else {
             invisWallNegativeZFlag = false;

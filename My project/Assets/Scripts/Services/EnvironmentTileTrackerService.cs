@@ -8,13 +8,15 @@ public class EnvironmentTileTrackerService : MonoBehaviour
 
     private List<List<bool>> tileMatrix;
 
-    private int currentXTilePosition = 50;
+    private int currentXTilePosition;
 
-    private int currentYTilePosition = 50;
+    private int currentYTilePosition;
 
     // Start is called before the first frame update
     void Start()
     {
+       currentXTilePosition = 50;
+       currentYTilePosition = 50;
        tileMatrix = new List<List<bool>>();
        prePopulateTiles(100, 100);
     }
@@ -51,9 +53,9 @@ public class EnvironmentTileTrackerService : MonoBehaviour
     }
 
     private void prePopulateTiles(int xRange, int yRange){
-        for (int i = 0; i < xRange; i++){
+        for (int i = 0; i < xRange; i++){   
             List<bool> column = new List<bool>();  
-            for (int z = 0; z < yRange; i++){
+            for (int z = 0; z < yRange; z++){
                 column.Add(false);
             }
             tileMatrix.Add(column);

@@ -7,7 +7,6 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     public EnvironmentTileTrackerService environmentTileTrackerService;
     public ProgressionController progressionController;
     public GameObject proceduralPrefab;
-    GameObject prefabToUse;
     GameObject generatedPrefab;
     public Transform environmentParent;
     public Transform currentTilePosition;
@@ -28,9 +27,13 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         
     }
 
-    void Update()
-    {
+    void Update(){
+
+    }
+
+    public void performGenerationStep(){
         if (generateNewPlatFormFlag){
+            generateNewPlatFormFlag = false;
             Vector3 spawnPosition = getSpawnPositions(currentTilePosition); 
             generateNewPlatform(spawnPosition);
             moveGeneratedTile(generatedPrefab);
@@ -41,13 +44,12 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
 
     private void updateProceduralServiceWithNewPlatformValues(){
         currentTilePosition = generatedPrefab.transform;
+
     }
     private void generateNewPlatform(Vector3 spawnPosition){
         int currentXTilePosition = environmentTileTrackerService.getCurrentXTilePosition();
         int currentYTilePosition = environmentTileTrackerService.getCurrentYTilePosition();
-        generateNewPlatFormFlag = false; 
-        prefabToUse = proceduralPrefab;
-        generatedPrefab = generatePreFabAtSpawnPosition(prefabToUse, spawnPosition, currentTilePosition); 
+        generatedPrefab = generatePreFabAtSpawnPosition(proceduralPrefab, spawnPosition, currentTilePosition); 
         updateTileTrackerServiceForTilePosition(currentXTilePosition, currentYTilePosition);
         updateTileTrackerServiceMatrix(currentXTilePosition, currentYTilePosition);       
 
@@ -108,8 +110,8 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     }
 
     private Direction performPreTileComparisonForYAxis (Transform initialTilePosition, Transform newTilePosition){
-        float initialYPosition = initialTilePosition.position.y;
-        float newYPosition = initialTilePosition.position.y;
+        float initialYPosition = initialTilePosition.position.z;
+        float newYPosition = initialTilePosition.position.z;
         float comparedYValue = initialYPosition - newYPosition;
         if(comparedYValue > 0){
             return Direction.NORTH;
@@ -119,7 +121,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         }
 
     }
-    private void linkGeneratedPrefabToProgressionController(){
+    private void  linkGeneratedPrefabToProgressionController(){
         progressionController.SetSpawnOrb(generatedPrefab.transform.Find("InteractactableProgressionOrbInstance").gameObject);
     }
 
