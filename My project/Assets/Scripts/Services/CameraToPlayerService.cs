@@ -12,6 +12,8 @@ public class CameraToPlayerService : MonoBehaviour
     public float camSens = 0.25f; //How sensitive it with mouse
 
     public bool needToUpdatePosition = false;
+
+    public Transform weaponTransform;
     void Start()
     {
         
@@ -23,12 +25,22 @@ public class CameraToPlayerService : MonoBehaviour
         if (needToUpdatePosition){
             updatePosition();
             updateMousePosition();
+           
+            updatePlayerWeaponPosition(this.gameObject.transform);
+            
         }
     }
 
     public void updatePosition(){
         gameObject.transform.position = transformToSet.position;
         gameObject.transform.rotation = transformToSet.rotation;
+
+    }
+
+    private void updatePlayerWeaponPosition(Transform cameraPosition){
+         Vector3 offSetPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1);
+        weaponTransform.position = offSetPosition;
+        weaponTransform.rotation = cameraPosition.rotation;
     }
 
     public void setTransform(Transform newTransform){

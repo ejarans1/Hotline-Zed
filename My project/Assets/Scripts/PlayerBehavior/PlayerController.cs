@@ -145,6 +145,8 @@ public class PlayerController : MonoBehaviour {
         cameraToPlayerService.setTransform(transformForCameraPosition);
         cameraToPlayerService.setUpdateFlag(true);
     }
+
+    
     
     private Vector3 GetBaseInput() { //returns the basic values, if it's 0 than it's not active.
         Vector3 p_Velocity = new Vector3();
@@ -157,11 +159,13 @@ public class PlayerController : MonoBehaviour {
             playerRigidBody.AddForce(cameraBackward);
         }
         if (Input.GetKey (KeyCode.A)){
-            playerRigidBody.AddForce(-1,0,0);
+            Vector3 cameraLeft = -cameraPosition.transform.right;
+            playerRigidBody.AddForce(cameraLeft);
             
         }
         if (Input.GetKey (KeyCode.D)){
-            playerRigidBody.AddForce(1,0,0);
+            Vector3 cameraRight = cameraPosition.transform.right;
+            playerRigidBody.AddForce(cameraRight);
         }
         return p_Velocity;
     }
