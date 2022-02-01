@@ -38,19 +38,19 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Environmental\LocationSpawner.cs" />
      <Compile Include="Assets\Scripts\Environmental\EnvironmentSpawner.cs" />
-     <Compile Include="Assets\Scripts\Services\EnvironmentTileTrackerService.cs" />
+     <Compile Include="Assets\Scripts\Services\GenerationServices\EnvironmentTileTrackerService.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\FlickerLight.cs" />
-     <Compile Include="Assets\Scripts\Services\EnvironmentTileMover.cs" />
-     <Compile Include="Assets\Scripts\Services\RandomPrefabService.cs" />
-     <Compile Include="Assets\Scripts\Services\CameraToPlayerService.cs" />
+     <Compile Include="Assets\Scripts\Services\GenerationServices\EnvironmentTileMover.cs" />
+     <Compile Include="Assets\Scripts\Services\ItemServices\RandomPrefabService.cs" />
+     <Compile Include="Assets\Scripts\Services\CharacterServices\CameraToPlayerService.cs" />
      <Compile Include="Assets\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
-     <Compile Include="Assets\Scripts\Services\ProceduralEnvironmentGenerationService.cs" />
+     <Compile Include="Assets\Scripts\Services\GenerationServices\ProceduralEnvironmentGenerationService.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\PlayerController.cs" />
      <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorToggle.cs" />
      <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorController.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Services\ProgressionController.cs" />
-     <Compile Include="Assets\Scripts\Services\Interacter.cs" />
+     <Compile Include="Assets\Scripts\Services\ItemServices\Interacter.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\UVOffset.cs" />
      <None Include="Assets\Lowpoly Style\Shared Materials and Textures\Water\Third-Party Notice.txt" />

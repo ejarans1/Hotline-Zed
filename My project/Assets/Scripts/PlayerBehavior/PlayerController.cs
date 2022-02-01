@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
     public float positiveYLimit = 25 ;
     public float negativeZLimit = -25;
     public float positiveZLimit = 25 ;
+    
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun= 1.0f;
     public float camSens = 0.25f; //How sensitive it with mouse
@@ -44,9 +45,7 @@ public class PlayerController : MonoBehaviour {
 
     public Rigidbody playerRigidBody;
 
-    public GameObject cameraPosition;
-    private GameObject oldCameraPosition;
-    public CameraToPlayerService cameraToPlayerService;
+    public Transform cameraPosition;
 
     
     
@@ -54,7 +53,7 @@ public class PlayerController : MonoBehaviour {
         calculateInvisibleWallViolations();
         updatePlayerAnimation();
         applyForce();
-        updatePlayerCameraPositionAndRotation();
+        
         invisibleWallCheck();
     }
 
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void LateUpdate(){
-
+        updatePlayerCameraPositionAndRotation();
     }
 
     private void calculateInvisibleWallViolations(){
@@ -88,14 +87,6 @@ public class PlayerController : MonoBehaviour {
         CalculateInvisibleWallNegativeY();
         CalculateInvisibleWallPositiveZ();
         CalculateInvisibleWallNegativeZ();
-    }
-
-    private void updateMousePosition(){
-        lastMouse = Input.mousePosition - lastMouse ;
-        lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0 );
-        lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x , transform.eulerAngles.y + lastMouse.y, 0);
-        transform.eulerAngles = lastMouse;
-        lastMouse =  Input.mousePosition;
     }
 
     private void invisibleWallCheck(){
@@ -138,12 +129,8 @@ public class PlayerController : MonoBehaviour {
     
 
     private void updatePlayerCameraPositionAndRotation(){
-        Transform transformForCameraPosition = cameraPosition.transform;
-        Vector3 positionVectorForCamera = new Vector3(transform.position.x, cameraPosition.transform.position.y, transform.position.z);
-        transformForCameraPosition.position = positionVectorForCamera;
-        transformForCameraPosition.rotation = cameraPosition.transform.rotation;
-        cameraToPlayerService.setTransform(transformForCameraPosition);
-        cameraToPlayerService.setUpdateFlag(true);
+        updatePosition(this.transform);
+        updateMousePosition();
     }
 
     
@@ -231,6 +218,23 @@ public class PlayerController : MonoBehaviour {
         } else {
             invisWallNegativeZFlag = false;
         }
+    }
+
+    private void updatePosition(Transform transformToSet){
+        cameraPosition.transform.position = transformToSet.position;
+        float mouseX = (Input.mousePosition.x / Screen.width ) - 0.5f;
+        float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
+        cameraPosition.transform.rotation = Quaternion.Euler (new Vector4 (-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
+        
+
+    }
+
+    private void updateMousePosition(){
+        lastMouse = Input.mousePosition - lastMouse ;
+        lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0 );
+        lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x , transform.eulerAngles.y + lastMouse.y, 0);
+        transform.eulerAngles = lastMouse;
+        lastMouse =  Input.mousePosition;
     }
 
 }
