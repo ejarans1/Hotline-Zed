@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
     public float positiveYLimit = 25 ;
     public float negativeZLimit = -25;
     public float positiveZLimit = 25 ;
+
+    public float transformOffset = 2;
     
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun= 1.0f;
@@ -47,13 +49,15 @@ public class PlayerController : MonoBehaviour {
 
     public Transform cameraPosition;
 
+    public Transform weapon;
+
     
     
     void Update () {
         calculateInvisibleWallViolations();
         updatePlayerAnimation();
         applyForce();
-        
+        updatePlayerCameraPositionAndRotation();
         invisibleWallCheck();
     }
 
@@ -77,7 +81,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void LateUpdate(){
-        updatePlayerCameraPositionAndRotation();
+        //setQuaternionWithOffset(cameraPosition);
+        //Vector3 generatePositionWithOffset2 = cameraPosition.localPosition;
+        
+        //Vector3 generatePositionWithOffset2 = generatePositionWithOffset(cameraPosition, 0 , 5 , 0);
+        //weapon.position = generatePositionWithOffset2;
     }
 
     private void calculateInvisibleWallViolations(){
@@ -131,6 +139,7 @@ public class PlayerController : MonoBehaviour {
     private void updatePlayerCameraPositionAndRotation(){
         updatePosition(this.transform);
         updateMousePosition();
+        
     }
 
     
@@ -196,7 +205,6 @@ public class PlayerController : MonoBehaviour {
     }
     private void CalculateInvisibleWallNegativeY(){
         if(gameObject.transform.position.y <= positiveYLimit){
-            //Debug.Log(gameObject.transform.position.y);
             invisWallNegativeYFlag = true;
         } else {
             invisWallNegativeYFlag = false;
@@ -235,6 +243,13 @@ public class PlayerController : MonoBehaviour {
         lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x , transform.eulerAngles.y + lastMouse.y, 0);
         transform.eulerAngles = lastMouse;
         lastMouse =  Input.mousePosition;
+    }
+
+    private Vector3 generatePositionWithOffset(Transform originalPosition, float xOffset, float yOffset, float zOffset){
+        float x = originalPosition.transform.position.x + xOffset;
+        float y = originalPosition.transform.position.y + yOffset;
+        float z = originalPosition.transform.position.z + zOffset;
+        return new Vector3(x,y,z);
     }
 
 }

@@ -11,15 +11,6 @@ public class AttackController : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
-    
-
-    void OnDrawGizmosSelected()
-    {
-        // Camera camera = GetComponent<Camera>();
-        // Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
-        // Gizmos.color = Color.yellow;
-        // Gizmos.DrawSphere(p, 0.1F);
-    }
     void Update(){
 
     }
@@ -51,17 +42,7 @@ public class AttackController : MonoBehaviour
                 print("We hit" + enemy.name);
                 Destroy(enemy.gameObject);
             }
-    }
-
-    
-    void onDrawGizmoSelected(){
-        if(attackPoint == null) {
-            return;
-        }
-        Gizmos.DrawSphere(attackPoint.position, attackRange);
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = attackPoint.position;
-    }
+    } 
 
      
 }

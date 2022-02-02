@@ -42,7 +42,6 @@
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\FlickerLight.cs" />
      <Compile Include="Assets\Scripts\Services\GenerationServices\EnvironmentTileMover.cs" />
      <Compile Include="Assets\Scripts\Services\ItemServices\RandomPrefabService.cs" />
-     <Compile Include="Assets\Scripts\Services\CharacterServices\CameraToPlayerService.cs" />
      <Compile Include="Assets\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
      <Compile Include="Assets\Scripts\Services\GenerationServices\ProceduralEnvironmentGenerationService.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\PlayerController.cs" />
