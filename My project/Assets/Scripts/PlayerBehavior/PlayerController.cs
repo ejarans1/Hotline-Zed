@@ -81,11 +81,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void LateUpdate(){
-        //setQuaternionWithOffset(cameraPosition);
-        //Vector3 generatePositionWithOffset2 = cameraPosition.localPosition;
-        
-        //Vector3 generatePositionWithOffset2 = generatePositionWithOffset(cameraPosition, 0 , 5 , 0);
-        //weapon.position = generatePositionWithOffset2;
+
     }
 
     private void calculateInvisibleWallViolations(){
@@ -131,7 +127,7 @@ public class PlayerController : MonoBehaviour {
             attackController.attack();
         }
         if(MouseButtonInput == 1){
-            animator.Play("one");
+            animator.Play("IdleWeapon");
         }
     }
     
@@ -229,7 +225,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void updatePosition(Transform transformToSet){
-        cameraPosition.transform.position = transformToSet.position;
+        Vector3 characterHeightPosition = generatePositionWithOffset(transformToSet, 0, 1, 0);
+        cameraPosition.transform.position = characterHeightPosition;
         float mouseX = (Input.mousePosition.x / Screen.width ) - 0.5f;
         float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
         cameraPosition.transform.rotation = Quaternion.Euler (new Vector4 (-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
