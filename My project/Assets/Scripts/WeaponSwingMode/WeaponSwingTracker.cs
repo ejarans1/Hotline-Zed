@@ -37,27 +37,32 @@ public class WeaponSwingTracker : MonoBehaviour
 
     private void handleSwingMode(){
         handleSwingModeFlag = true;
-
+        Debug.Log("handleSwingMode");
         Transform enemy = calculateTargetEnemy();
         stopAllMovement(player, enemy);
-        float zCoordLimit = obtainZCoordinateLimitForEnemy(enemy);
+        //float zCoordLimit = obtainZCoordinateLimitForEnemy(enemy);
         Vector3 mousePoint = getMousePosition();
-        Vector3 swingLineSpawnStartAndLimit = new Vector3(mousePoint.x, mousePoint.y, zCoordLimit);
+        Vector3 swingLineSpawnStartAndLimit = new Vector3(mousePoint.x, mousePoint.y, 5);
 
         while (handleSwingModeFlag){
-            generateLineAtMousePoint(swingLineSpawnStartAndLimit);
+            generateInFrontOfPlayer(swingLineSpawnStartAndLimit);
+            handleSwingModeFlag = calculateExitSwing();
         }
 
         bool wasEnemyHit = calculateEnemyHitFlag();
         if(wasEnemyHit){
             Destroy(enemy);
         }
-        
+
         destroyRemainingSpheres();
         
         startMovementAgain();
 
              
+    }
+
+    private bool calculateExitSwing (){
+        return false;
     }
 
     private void destroyRemainingSpheres(){
@@ -70,12 +75,26 @@ public class WeaponSwingTracker : MonoBehaviour
 
     private void generateLineAtMousePoint(Vector3 positionToGenerate){
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.parent = camera.transform;
         sphere.transform.position = positionToGenerate;
+        
+    }
+
+    private void generateInFrontOfPlayer(Vector3 positionToGenerate){
+         Vector3 playerPos = player.transform.position;
+         Vector3 playerDirection = player.transform.forward;
+         Quaternion playerRotation = player.transform.rotation;
+         float spawnDistance = 10;
+ 
+        Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
+ 
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.position = spawnPos;
     }
 
     private void stopAllMovement(Transform player1, Transform enemy1){
-        player1.transform.position = player1.transform.position;
-        enemy1.transform.position = enemy1.transform.position;
+        //player1.transform.position = player1.transform.position;
+        //enemy1.transform.position = enemy1.transform.position;
     }
 
     private float obtainZCoordinateLimitForEnemy(Transform enemy1){
@@ -100,7 +119,7 @@ public class WeaponSwingTracker : MonoBehaviour
     }
 
     private bool calculateEnemyHitFlag(){
-        return true;
+        return false;
     }
 
     
