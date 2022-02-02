@@ -7,9 +7,15 @@ public class WeaponSwingTracker : MonoBehaviour
 
     bool handleSwingModeFlag = false;
 
+    int swingModeTriggerCount = 0;
+
     public Camera camera;
 
     public Transform player;
+
+    private Transform enemy;
+
+    private Vector3 swingLineSpawnStartandLimit;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +25,26 @@ public class WeaponSwingTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         int MouseButtonInput = getBaseInputForMouse();
         if (MouseButtonInput == 1){
-            handleSwingMode();
+            if (swingModeTriggerCount == 0){
+                handleSwingModeFlag = true;
+                enemy = calculateTargetEnemy();
+                swingLineSpawnStartandLimit = calculateSwingLineSpawnAndLimit(enemy);
+                stopAllMovement(player, enemy);
+                swingModeTriggerCount++;    
+            }
+            else if(swingModeTriggerCount == 1) {
+                swingModeTriggerCount = 0;
+                handleSwingModeFlag = false;
+            }
         }
+        if (handleSwingModeFlag){
+            handleSwingMode(enemy, swingLineSpawnStartandLimit);
+        }
+        
     }
 
     private int getBaseInputForMouse() {
@@ -35,23 +57,11 @@ public class WeaponSwingTracker : MonoBehaviour
         return -1;
     }
 
-    private void handleSwingMode(){
-        handleSwingModeFlag = true;
-        Debug.Log("handleSwingMode");
-        Transform enemy = calculateTargetEnemy();
-        stopAllMovement(player, enemy);
-        //float zCoordLimit = obtainZCoordinateLimitForEnemy(enemy);
-        Vector3 mousePoint = getMousePosition();
-        Vector3 swingLineSpawnStartAndLimit = new Vector3(mousePoint.x, mousePoint.y, 5);
-
-        while (handleSwingModeFlag){
-            generateInFrontOfPlayer(swingLineSpawnStartAndLimit);
-            handleSwingModeFlag = calculateExitSwing();
-        }
-
+    private void handleSwingMode(Transform enemy1, Vector3 startPosition){
+        generateInFrontOfPlayer(swingLineSpawnStartandLimit);
         bool wasEnemyHit = calculateEnemyHitFlag();
         if(wasEnemyHit){
-            Destroy(enemy);
+            Destroy(enemy1);
         }
 
         destroyRemainingSpheres();
@@ -59,6 +69,13 @@ public class WeaponSwingTracker : MonoBehaviour
         startMovementAgain();
 
              
+    }
+
+    private Vector3 calculateSwingLineSpawnAndLimit(Transform enemy){
+        Vector3 mousePoint = getMousePosition();
+        //float zCoordLimit = obtainZCoordinateLimitForEnemy(enemy);
+        Vector3 swingLineSpawnStartAndLimit = new Vector3(mousePoint.x, mousePoint.y, 5);
+        return swingLineSpawnStartAndLimit;
     }
 
     private bool calculateExitSwing (){
@@ -81,15 +98,17 @@ public class WeaponSwingTracker : MonoBehaviour
     }
 
     private void generateInFrontOfPlayer(Vector3 positionToGenerate){
-         Vector3 playerPos = player.transform.position;
-         Vector3 playerDirection = player.transform.forward;
-         Quaternion playerRotation = player.transform.rotation;
-         float spawnDistance = 10;
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerDirection = player.transform.forward;
+        Quaternion playerRotation = player.transform.rotation;
+        float spawnDistance = 10;
+
+         
  
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
- 
+        Vector3 swingLineSpawnStartAndLimit = new Vector3(spawnPos.x, spawnPos.y, 5);
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = spawnPos;
+        sphere.transform.position = swingLineSpawnStartAndLimit;
     }
 
     private void stopAllMovement(Transform player1, Transform enemy1){
