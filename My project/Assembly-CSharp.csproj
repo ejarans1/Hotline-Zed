@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\UI\MainMenuService.cs" />
      <None Include="Assets\Lowpoly Style\Shared Materials and Textures\Water\Third-Party Notice.txt" />
      <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
+     <None Include="Assets\6000FlatButtonIcon\readme.txt" />
      <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
      <None Include="Assets\Trees\LowPolyTreePack\README.txt" />
      <None Include="Assets\Skyboxes\Stylized Sky\Shaders\Stylized Sky.shader" />
