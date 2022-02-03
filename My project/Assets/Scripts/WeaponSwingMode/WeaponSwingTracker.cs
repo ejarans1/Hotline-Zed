@@ -99,15 +99,16 @@ public class WeaponSwingTracker : MonoBehaviour
 
     private void generateInFrontOfPlayer(Vector3 positionToGenerate){
         Vector3 playerPos = player.transform.position;
-        Vector3 playerDirection = player.transform.forward;
-        Quaternion playerRotation = player.transform.rotation;
+        Vector3 playerDirection = camera.transform.forward;
+        Quaternion playerRotation = camera.transform.rotation;
         float spawnDistance = 10;
 
          
  
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
-        Vector3 swingLineSpawnStartAndLimit = new Vector3(spawnPos.x, spawnPos.y, 5);
+        Vector3 swingLineSpawnStartAndLimit = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.rotation = playerRotation; 
         sphere.transform.position = swingLineSpawnStartAndLimit;
     }
 
