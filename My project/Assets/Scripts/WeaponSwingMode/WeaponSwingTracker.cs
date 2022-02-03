@@ -11,6 +11,8 @@ public class WeaponSwingTracker : MonoBehaviour
 
     public Camera camera;
 
+    public GameObject hitMarkerPrefab;
+
     public Transform player;
 
     private Transform enemy;
@@ -104,12 +106,10 @@ public class WeaponSwingTracker : MonoBehaviour
         float spawnDistance = 10;
 
          
- 
+
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
         Vector3 swingLineSpawnStartAndLimit = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.rotation = playerRotation; 
-        sphere.transform.position = swingLineSpawnStartAndLimit;
+        generatePreFabAtSpawnPosition(hitMarkerPrefab, spawnPos, playerRotation);
     }
 
     private void stopAllMovement(Transform player1, Transform enemy1){
@@ -140,6 +140,11 @@ public class WeaponSwingTracker : MonoBehaviour
 
     private bool calculateEnemyHitFlag(){
         return false;
+    }
+
+    private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Vector3  spawnPosition, Quaternion swingRotation){
+        GameObject gameObjectPrefab = Instantiate(prefabToUse, spawnPosition, swingRotation);
+        return gameObjectPrefab;
     }
 
     
