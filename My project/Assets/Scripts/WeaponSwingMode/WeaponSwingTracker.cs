@@ -14,6 +14,8 @@ public class WeaponSwingTracker : MonoBehaviour
     public GameObject hitMarkerPrefab;
 
     public Transform player;
+    
+    private Vector3 swingModeStartPosition;
 
     private Transform enemy;
 
@@ -35,7 +37,7 @@ public class WeaponSwingTracker : MonoBehaviour
                 handleSwingModeFlag = true;
                 enemy = calculateTargetEnemy();
                 swingLineSpawnStartandLimit = calculateSwingLineSpawnAndLimit(enemy);
-                stopAllMovement(player, enemy);
+                swingModeStartPosition = player.position;
                 swingModeTriggerCount++;    
             }
             else if(swingModeTriggerCount == 1) {
@@ -61,6 +63,7 @@ public class WeaponSwingTracker : MonoBehaviour
 
     private void handleSwingMode(Transform enemy1, Vector3 startPosition){
         generateInFrontOfPlayer(swingLineSpawnStartandLimit);
+        player.position = swingModeStartPosition;
         bool wasEnemyHit = calculateEnemyHitFlag();
         if(wasEnemyHit){
             Destroy(enemy1);
@@ -76,7 +79,7 @@ public class WeaponSwingTracker : MonoBehaviour
     private Vector3 calculateSwingLineSpawnAndLimit(Transform enemy){
         Vector3 mousePoint = getMousePosition();
         //float zCoordLimit = obtainZCoordinateLimitForEnemy(enemy);
-        Vector3 swingLineSpawnStartAndLimit = new Vector3(mousePoint.x, mousePoint.y, 5);
+        Vector3 swingLineSpawnStartAndLimit = new Vector3(mousePoint.x, mousePoint.y, 1);
         return swingLineSpawnStartAndLimit;
     }
 
@@ -92,20 +95,12 @@ public class WeaponSwingTracker : MonoBehaviour
 
     }
 
-    private void generateLineAtMousePoint(Vector3 positionToGenerate){
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.parent = camera.transform;
-        sphere.transform.position = positionToGenerate;
-        
-    }
-
     private void generateInFrontOfPlayer(Vector3 positionToGenerate){
         Vector3 playerPos = player.transform.position;
         Vector3 playerDirection = camera.transform.forward;
         Quaternion playerRotation = camera.transform.rotation;
-        float spawnDistance = 10;
+        float spawnDistance = 5;
 
-         
 
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
         Vector3 swingLineSpawnStartAndLimit = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
