@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\UVOffset.cs" />
      <Compile Include="Assets\Scripts\WeaponSwingMode\HitDetectionService.cs" />
+     <Compile Include="Assets\Scripts\EnemyBehavior\EnemySpawnerService.cs" />
      <None Include="Assets\Lowpoly Style\Shared Materials and Textures\Water\Third-Party Notice.txt" />
      <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
      <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
