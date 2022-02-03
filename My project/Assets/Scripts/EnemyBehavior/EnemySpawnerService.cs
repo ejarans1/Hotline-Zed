@@ -13,6 +13,8 @@ public class EnemySpawnerService : MonoBehaviour
 
     public int initialSpawnLimit = 0;
 
+    public bool isActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +24,21 @@ public class EnemySpawnerService : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (initialSpawnLimit <= maxEnemiesSpawned){
-            spawnNewEnemy(spawnPoint);
-            initialSpawnLimit++;
-            
+        if (isActive){
+            if (initialSpawnLimit <= maxEnemiesSpawned){
+                    spawnNewEnemy(spawnPoint);
+                    initialSpawnLimit++;
+                }
+            else {
+                //Do Nothing For TimeBeing
+            }
         }
-        else {
-            Destroy(this.gameObject);
-        }
+        
 
+    }
+
+    public void setActiveFlag(bool valueToSet){
+        isActive = valueToSet;
     }
 
     private GameObject spawnNewEnemy(Transform spawnPoint) {

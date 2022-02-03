@@ -10,6 +10,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     public ProgressionController progressionController;
     public GameObject proceduralPrefab;
     GameObject generatedPrefab;
+    public List<GameObject> environmentSpawnersObjects = new List<GameObject>();
     public Transform environmentParent;
     public Transform currentTilePosition;
     bool generateNewPlatFormFlag = false;
@@ -44,9 +45,23 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
             Vector3 spawnPosition = getSpawnPositions(currentTilePosition); 
             generateNewPlatform(spawnPosition);
             moveGeneratedTile(generatedPrefab);
+            activateEnemySpawners(generatedPrefab);
             linkGeneratedPrefabToProgressionController();
             updateProceduralServiceWithNewPlatformValues();
         }
+    }
+
+    private void activateEnemySpawners(GameObject generatedPrefabToActivate){
+        List <GameObject> enemySpawners = findEnemySpawners(generatedPrefabToActivate);
+        foreach (GameObject enemySpawner in enemySpawners ){
+            EnemySpawnerService enemySpawnerService = enemySpawner.GetComponent<EnemySpawnerService>();
+            enemySpawnerService.setActiveFlag(true);
+        }
+    }
+
+    private List<GameObject> findEnemySpawners (GameObject generatedPrefabWithChildren){
+        List<GameObject> enemySpawners = FindObjectwithTag("EnemySpawner" ,generatedPrefabWithChildren.transform);
+        return enemySpawners;
     }
 
     private void updateProceduralServiceWithNewPlatformValues(){
@@ -208,4 +223,27 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     private bool checkTileAvailability(int xAxis, int yAxis){
         return environmentTileTrackerService.getMatrixValue(xAxis, yAxis);
     }
+
+    private List<GameObject> FindObjectwithTag(string _tag, Transform parent)
+     {
+         environmentSpawnersObjects.Clear();
+         GetChildObject(parent, _tag);
+         return environmentSpawnersObjects;
+     }
+ 
+    private void GetChildObject(Transform parent, string _tag)
+     {
+         for (int i = 0; i < parent.childCount; i++)
+         {
+             Transform child = parent.GetChild(i);
+             if (child.tag == _tag)
+             {
+                environmentSpawnersObjects.Add(child.gameObject);
+             }
+             if (child.childCount > 0)
+             {
+                 GetChildObject(child, _tag);
+             }
+         }
+     }
 }
