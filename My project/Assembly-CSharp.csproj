@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\Environmental\LocationSpawner.cs" />
      <Compile Include="Assets\Scripts\WeaponSwingMode\WeaponSwingTracker.cs" />
      <Compile Include="Assets\Scripts\Environmental\EnvironmentSpawner.cs" />
+     <Compile Include="Assets\Scripts\EnemyBehavior\EnemySpawnerService.cs" />
      <Compile Include="Assets\Scripts\Services\GenerationServices\EnvironmentTileTrackerService.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\FlickerLight.cs" />
      <Compile Include="Assets\Scripts\Services\GenerationServices\EnvironmentTileMover.cs" />
@@ -50,12 +51,12 @@
      <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorToggle.cs" />
      <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorController.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\WeaponSwingMode\HitDetectionService.cs" />
      <Compile Include="Assets\Scripts\Services\ProgressionController.cs" />
      <Compile Include="Assets\Scripts\Services\ItemServices\Interacter.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\UVOffset.cs" />
-     <Compile Include="Assets\Scripts\WeaponSwingMode\HitDetectionService.cs" />
-     <Compile Include="Assets\Scripts\EnemyBehavior\EnemySpawnerService.cs" />
+     <Compile Include="Assets\Scripts\UI\MainMenuService.cs" />
      <None Include="Assets\Lowpoly Style\Shared Materials and Textures\Water\Third-Party Notice.txt" />
      <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
      <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
