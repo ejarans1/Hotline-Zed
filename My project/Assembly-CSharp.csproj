@@ -57,6 +57,8 @@
      <Compile Include="Assets\Scripts\PlayerBehavior\AttackController.cs" />
      <Compile Include="Assets\Lowpoly Style\Shared Scripts\UVOffset.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenuService.cs" />
+     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerGearService.cs" />
+     <Compile Include="Assets\Scripts\PlayerBehavior\CharacterStatService.cs" />
      <None Include="Assets\Lowpoly Style\Shared Materials and Textures\Water\Third-Party Notice.txt" />
      <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
      <None Include="Assets\6000FlatButtonIcon\readme.txt" />
