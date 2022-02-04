@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStatService : MonoBehaviour
 {
     private float maxSkillPoints;
     private float maxHealthPoints;
     private float maxStamina;
-
     private float currentHealth;
     private float currentSkill;
     private float currentStamina;
-
-    
     public Transform player; 
+    public HealthBarService healthBarService;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +28,7 @@ public class CharacterStatService : MonoBehaviour
     public void decrementHealthByAmount(float amountToDecrement){
         if (currentStamina != 0) {
             currentHealth = currentHealth - amountToDecrement;
+            healthBarService.setHealthSlider(currentHealth);
         }
     }
 
@@ -42,6 +42,10 @@ public class CharacterStatService : MonoBehaviour
         if (currentSkill != 0) {
             currentSkill = currentSkill - amountToDecrement;
         }
+    }
+    
+    public float getCurrentHealth(){
+        return currentHealth;
     }
 
     // Update is called once per frame
