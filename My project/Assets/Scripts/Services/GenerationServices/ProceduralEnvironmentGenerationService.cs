@@ -15,6 +15,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
     public Transform currentTilePosition;
     bool generateNewPlatFormFlag = false;
     bool rollPlatformFlag = false;
+    float tileCount = 0;
 
 
 
@@ -48,6 +49,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
             activateEnemySpawners(generatedPrefab);
             linkGeneratedPrefabToProgressionController();
             updateProceduralServiceWithNewPlatformValues();
+            tileCount++;
         }
     }
 
@@ -210,6 +212,10 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         spawnLocations.Add(generatePositionWithOffset(originalPosition, 0, -20, 40));
         
         return spawnLocations[(Random.Range(0, spawnLocations.Capacity))];
+    }
+
+    public float getTileCount(){
+        return tileCount;
     }
 
     public void triggerProceduralGenerationStep(){
