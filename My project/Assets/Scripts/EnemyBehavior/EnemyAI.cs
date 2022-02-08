@@ -10,7 +10,7 @@ public float MaxDist = 10;
 public float MinDist = 5;
 public float interactRange;
 public LayerMask hitMarkerLayers;
- 
+
  
  
  
@@ -35,7 +35,10 @@ public LayerMask hitMarkerLayers;
         foreach(Collider interactCollider in enemySphereColliders){
             CharacterStatService characterStatService = interactCollider.gameObject.GetComponent<CharacterStatService>();
             characterStatService.decrementHealthByAmount(10f);
-        }   
+    }
+
+
+    
  }
 
 
