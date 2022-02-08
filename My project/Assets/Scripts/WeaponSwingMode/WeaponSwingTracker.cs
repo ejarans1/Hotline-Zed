@@ -20,10 +20,12 @@ public class WeaponSwingTracker : MonoBehaviour
     private Transform enemy;
 
     private Vector3 swingLineSpawnStartandLimit;
+
+    private List<GameObject> generatedHitMarkers;
     // Start is called before the first frame update
     void Start()
     {
-        
+        generatedHitMarkers = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -38,7 +40,9 @@ public class WeaponSwingTracker : MonoBehaviour
                 enemy = calculateTargetEnemy();
                 swingLineSpawnStartandLimit = calculateSwingLineSpawnAndLimit(enemy);
                 swingModeStartPosition = player.position;
-                swingModeTriggerCount++;    
+                swingModeTriggerCount++; 
+                destroyRemainingHitMarkers();
+                generatedHitMarkers.Clear();  
             }
             else if(swingModeTriggerCount == 1) {
                 swingModeTriggerCount = 0;
@@ -62,18 +66,21 @@ public class WeaponSwingTracker : MonoBehaviour
     }
 
     private void handleSwingMode(Transform enemy1, Vector3 startPosition){
-        generateInFrontOfPlayer(swingLineSpawnStartandLimit);
+        GameObject hitMarker = generateInFrontOfPlayer(swingLineSpawnStartandLimit);
+        addGeneratedPrefabToHitMarkerList(hitMarker);
         player.position = swingModeStartPosition;
         bool wasEnemyHit = calculateEnemyHitFlag();
         if(wasEnemyHit){
             Destroy(enemy1);
         }
-
-        destroyRemainingSpheres();
         
         startMovementAgain();
 
              
+    }
+
+    private void addGeneratedPrefabToHitMarkerList(GameObject newHitMarker){
+        generatedHitMarkers.Add(newHitMarker);
     }
 
     private Vector3 calculateSwingLineSpawnAndLimit(Transform enemy){
@@ -87,15 +94,17 @@ public class WeaponSwingTracker : MonoBehaviour
         return false;
     }
 
-    private void destroyRemainingSpheres(){
-        
+    private void destroyRemainingHitMarkers(){
+        foreach (GameObject hitMarkerToDestroy in generatedHitMarkers){
+            Destroy(hitMarkerToDestroy);
+        }
     }
 
     private void startMovementAgain(){
 
     }
 
-    private void generateInFrontOfPlayer(Vector3 positionToGenerate){
+    private GameObject generateInFrontOfPlayer(Vector3 positionToGenerate){
         Vector3 playerPos = player.transform.position;
         Vector3 playerDirection = camera.transform.forward;
         Quaternion playerRotation = camera.transform.rotation;
@@ -104,7 +113,7 @@ public class WeaponSwingTracker : MonoBehaviour
 
         Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
         Vector3 swingLineSpawnStartAndLimit = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
-        generatePreFabAtSpawnPosition(hitMarkerPrefab, spawnPos, playerRotation);
+        return generatePreFabAtSpawnPosition(hitMarkerPrefab, spawnPos, playerRotation);
     }
 
     private void stopAllMovement(Transform player1, Transform enemy1){
