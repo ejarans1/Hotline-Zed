@@ -17,7 +17,7 @@ public class XPService : MonoBehaviour
     void Start()
     {
         xpMeter = 0;
-        xpMaxAmount = 10;
+        xpMaxAmount = 100;
         increaseFactor = 1.2f;
     }
 
