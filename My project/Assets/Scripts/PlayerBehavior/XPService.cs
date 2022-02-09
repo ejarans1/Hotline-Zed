@@ -7,10 +7,18 @@ public class XPService : MonoBehaviour
 {
     // Start is called before the first frame update
     public Slider slider;
+    public CharacterStatService characterStatService;
     float xpMeter;
+    
+    float xpMaxAmount;
+
+    float increaseFactor;
+
     void Start()
     {
         xpMeter = 0;
+        xpMaxAmount = 10;
+        increaseFactor = 1.2f;
     }
 
     // Update is called once per frame
@@ -18,6 +26,7 @@ public class XPService : MonoBehaviour
     {
         List<GameObject> experienceOrbs = collectExperienceOrbs();
         addOrbValues(experienceOrbs);
+        calculatePotentialLevelIncrease();
         increaseXpInUi(xpMeter);
         deleteOrbs(experienceOrbs);
     }
@@ -44,6 +53,13 @@ public class XPService : MonoBehaviour
         }
     }
 
+    private void calculatePotentialLevelIncrease(){
+        if (xpMeter > xpMaxAmount){
+            xpMeter = 0;
+            xpMaxAmount = xpMaxAmount * increaseFactor;
+            characterStatService.increaseLevel();
+        }
+    }
     private void deleteOrbs(List<GameObject> orbsToDelete){
         foreach(GameObject xpOrb in orbsToDelete){
             Destroy(xpOrb);

@@ -9,7 +9,11 @@ public class UIHandlerService : MonoBehaviour
 
     public TMP_Text counterText;
 
+    public TMP_Text levelText;
+
     public ProceduralEnvironmentGenerationService proceduralEnvironmentGenerationService;
+
+    public CharacterStatService characterStatService;
 
     void Start()
     {
@@ -20,5 +24,7 @@ public class UIHandlerService : MonoBehaviour
     void Update()
     {
         counterText.text = proceduralEnvironmentGenerationService.getTileCount().ToString();
+        levelText.text = characterStatService.getCurrentLevel().ToString();
+        
     }
 }
