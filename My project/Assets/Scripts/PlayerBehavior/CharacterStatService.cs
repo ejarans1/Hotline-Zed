@@ -37,6 +37,13 @@ public class CharacterStatService : MonoBehaviour
         }
     }
 
+    public void incrementHealthByAmount(float amountToIncrement){
+        if(currentHealth != maxHealthPoints){
+            currentHealth = currentHealth + amountToIncrement;
+            healthBarService.setHealthSlider(currentHealth);
+        }
+    }
+
     public void decrementStaminaByAmount(float amountToDecrement){
         if (currentStamina != 0) {
             currentStamina = currentStamina - amountToDecrement;

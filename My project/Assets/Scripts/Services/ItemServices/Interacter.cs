@@ -7,6 +7,7 @@ public class Interacter : MonoBehaviour
 
     public ProgressionController progressionController;
     public Transform player;
+    public CharacterStatService characterStatService;
     public bool hasInteracted = false;
     public float interactRange;
     public LayerMask itemLayers;
@@ -26,16 +27,36 @@ public class Interacter : MonoBehaviour
         if (progressionController.GetLevelClearedFlag() == true){
             Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
             foreach(Collider interactCollider in playerSphereColliders){
-                progressionController.SetInteractedServiceFlag(true);
-                
-                
-                
+                string pickUpTag  = determinePickUpType(interactCollider);
+                processPickupByTag(pickUpTag, interactCollider);
             }
         }
     }
 
     public bool getHasInteracted(){
         return hasInteracted;
+    } 
+
+    private string determinePickUpType(Collider interactedObject){
+        string pickUpType = null;
+        if (interactedObject.gameObject.tag == "ProgressionPickup"){
+            pickUpType = "ProgressionPickup";
+        }
+        if (interactedObject.gameObject.tag == "HealthPickup"){
+            pickUpType = "HealthPickup";
+        }
+        return pickUpType;
+    }
+
+    private void processPickupByTag(string pickUpTag, Collider interactCollider){
+        if (pickUpTag == "ProgressionPickup"){
+            progressionController.SetInteractedServiceFlag(true);
+        }
+        if (pickUpTag == "HealthPickup"){
+            characterStatService.incrementHealthByAmount(10f);
+            Destroy(interactCollider.gameObject);
+
+        }
     }
 
     public void setHasInteracted(bool valueToSet){

@@ -9,6 +9,8 @@ public class HitDetectionService : MonoBehaviour
     public LayerMask hitMarkerLayers;
 
     public GameObject xpOrbPrefab;
+
+    public GameObject healthPickupPrefab;
  
     // Start is called before the first frame update
     void Start()
@@ -23,8 +25,14 @@ public class HitDetectionService : MonoBehaviour
         interactRange,
         hitMarkerLayers);
         foreach(Collider interactCollider in playerSphereColliders){
-            GameObject generatedXpOrb = generatePreFabAtSpawnPosition(xpOrbPrefab, this.gameObject.transform.position, gameObject.transform.rotation);
+            GameObject generatedXpOrb = generatePreFabAtSpawnPosition(xpOrbPrefab,
+                                                this.gameObject.transform.position,
+                                                gameObject.transform.rotation);
             generatedXpOrb.tag = "XP";
+            GameObject generatedHealthPickup = generatePreFabAtSpawnPosition(healthPickupPrefab,
+                                                this.gameObject.transform.position,
+                                                gameObject.transform.rotation);
+            generatedHealthPickup.tag = "HealthPickup";
             Destroy(interactCollider.gameObject);
         }        
     }
