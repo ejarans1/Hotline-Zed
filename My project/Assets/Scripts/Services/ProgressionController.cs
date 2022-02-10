@@ -12,7 +12,6 @@ public class ProgressionController : MonoBehaviour
     public Transform player;
     public Transform enemyGameObjectParents;
     public ProceduralEnvironmentGenerationService proceduralEnvironmentGenerationService;
-    public LocationSpawner locationSpawner;
     private GameObject oldBuildingSpawn;
     public float spawnDistance = 10;
 
