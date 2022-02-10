@@ -111,12 +111,20 @@ public class InventoryUIHandler : MonoBehaviour
         Image NewImage = NewObj.AddComponent<Image>();
         NewImage.sprite = imageToUse.sprite;
         NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
+        NewObj.transform.position = generatePositionWithOffset(ParentPanel.transform, -10, -10, 10);
         NewObj.SetActive(true); //Activate the GameObject
         return NewObj;
     }
 
        private bool isInventoryRowMaxedOut(int rowToCheck){
         return false; 
+    }
+
+    private Vector3 generatePositionWithOffset(Transform originalPosition, float xOffset, float yOffset, float zOffset){
+        float x = originalPosition.transform.position.x + xOffset;
+        float y = originalPosition.transform.position.y + yOffset;
+        float z = originalPosition.transform.position.z + zOffset;
+        return new Vector3(x,y,z);
     }
 
 }
