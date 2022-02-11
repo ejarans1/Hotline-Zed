@@ -96,7 +96,7 @@ public class InventoryUIHandler : MonoBehaviour
         List<Image> inventoryColumn = inventoryMatrix[yPosition];
         Debug.Log("Count of Array is " + inventoryColumn.Count);
         if (inventoryColumn.Count < maxInventoryItemsX){
-            generatePreFabAtSpawnPosition(newInventoryItem);
+            generatePreFabAtSpawnPosition(newInventoryItem, xPosition, yPosition);
             inventoryColumn.Add(newInventoryItem);
         }
     } 
@@ -106,12 +106,14 @@ public class InventoryUIHandler : MonoBehaviour
         return gameObjectPrefab;
     }
 
-        private GameObject generatePreFabAtSpawnPosition(Image imageToUse){
+        private GameObject generatePreFabAtSpawnPosition(Image imageToUse, float xPosition, float yPosition){
         GameObject NewObj = new GameObject(); //Create the GameObject
         Image NewImage = NewObj.AddComponent<Image>();
+        float xOffset = calculateImageXPosition(xPosition);
+        float yOffset = calculateImageYPosition(yPosition);
         NewImage.sprite = imageToUse.sprite;
         NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
-        NewObj.transform.position = generatePositionWithOffset(ParentPanel.transform, -10, -10, 10);
+        NewObj.transform.position = generatePositionWithOffset(ParentPanel.transform, xOffset, yOffset, 10);
         NewObj.SetActive(true); //Activate the GameObject
         return NewObj;
     }
@@ -119,6 +121,17 @@ public class InventoryUIHandler : MonoBehaviour
        private bool isInventoryRowMaxedOut(int rowToCheck){
         return false; 
     }
+
+    private float calculateImageXPosition(float xPosition){
+        return xPosition * 100; 
+    }
+
+    private float calculateImageYPosition(float yPosition){
+        return yPosition * 100; 
+    }
+
+    
+
 
     private Vector3 generatePositionWithOffset(Transform originalPosition, float xOffset, float yOffset, float zOffset){
         float x = originalPosition.transform.position.x + xOffset;
