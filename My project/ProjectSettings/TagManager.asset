@@ -8,6 +8,7 @@ TagManager:
   - XP
   - HealthPickup
   - ProgressionPickup
+  - InventoryPickup
   layers:
   - Default
   - TransparentFX

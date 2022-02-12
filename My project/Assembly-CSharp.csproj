@@ -75,6 +75,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
      <Compile Include="Assets\Trees\LowPolyFencePack\Scripts\DoorController.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\UI\InventoryUIHandler.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\PlayerCombat\HitDetectionService.cs" />
      <Compile Include="Assets\Scripts\Services\ProgressionController.cs" />
      <Compile Include="Assets\Scripts\Services\ItemServices\Interacter.cs" />
@@ -96,7 +97,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\CharacterStatService.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-     <Compile Include="Assets\Scripts\UI\InventoryUIHandler.cs" />
+     <Compile Include="Assets\Scripts\Services\ItemServices\InventoryItem.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

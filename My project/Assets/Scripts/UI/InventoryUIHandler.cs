@@ -7,19 +7,18 @@ public class InventoryUIHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     public Image sampleSprite;
-
     public Transform ParentPanel;
-
     public float inventoryWidth;
     public float inventoryHeight;
     public float maxInventoryItemsY;
     public float maxInventoryItemsX;
     private float inventoryTileHeight;
     private float inventoryTileWidth;
-
     private List<Image> inventoryItems;
     private int inventorySizeXAxis;
     private int inventorySizeYAxis;
+    private int inventoryPopulatedYPosition;
+    private int inventoryPopulatedXPosition;
     private List<List<Image>> inventoryMatrix;
 
 
@@ -28,14 +27,21 @@ public class InventoryUIHandler : MonoBehaviour
     {
         inventoryHeight = 600;
         inventoryWidth = 700;
+
         maxInventoryItemsX = 10;
         maxInventoryItemsY = 10;
+
         inventoryTileHeight = inventoryHeight / maxInventoryItemsX;
         inventoryTileWidth = inventoryWidth / maxInventoryItemsY; 
 
         inventorySizeXAxis = 10;
         inventorySizeYAxis = 10;
+
+        inventoryPopulatedYPosition = 0;
+        inventoryPopulatedXPosition = 0;
+
         inventoryMatrix = new List<List<Image>>();
+
         for (int columnsOfInventory = 0; columnsOfInventory < inventorySizeXAxis; columnsOfInventory++ ){
             List<Image> row = new List<Image>();
             inventoryMatrix.Add(row);
@@ -43,15 +49,18 @@ public class InventoryUIHandler : MonoBehaviour
 
         List<GameObject> inventoryItems = searchForInventoryItemsInWorldSpace();
         List<Image> inventoryImages = obtainImageSpritesForInventoryItems(inventoryItems); 
-        populateImageSpritesIntoInventoryPanel(inventoryImages);
+        //populateImageSpritesIntoInventoryPanel(inventoryImages);
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void FixedUpdate(){
+        //populateSingleItemToInventory(sampleSprite);
     }
 
     private List<GameObject> searchForInventoryItemsInWorldSpace (){
@@ -78,6 +87,22 @@ public class InventoryUIHandler : MonoBehaviour
         }
     }
 
+    public void populateSingleItemToInventory(Image imageSprite){
+        checkCurrentInventoryRowAndColumnLimits();
+        addItemToInventoryMatrix(imageSprite,inventoryPopulatedYPosition, inventoryPopulatedXPosition);
+        inventoryPopulatedXPosition++;
+    }
+
+    private void checkCurrentInventoryRowAndColumnLimits(){
+        if(inventoryPopulatedXPosition == maxInventoryItemsX){
+            inventoryPopulatedXPosition = 0;
+            inventoryPopulatedYPosition = inventoryPopulatedYPosition + 1;
+        }
+        if(inventoryPopulatedYPosition == maxInventoryItemsY){
+            inventoryPopulatedYPosition = 0;
+        }
+    }
+
     private GameObject generatePreFabAtSpawnPosition(){
         GameObject NewObj = new GameObject(); //Create the GameObject
         Image NewImage = NewObj.AddComponent<Image>();
@@ -89,17 +114,12 @@ public class InventoryUIHandler : MonoBehaviour
 
     
     public void addItemToInventoryMatrix(Image newInventoryItem, int yPosition, int xPosition){
-        
-        Debug.Log("XPosition is " + xPosition);
-        Debug.Log("YPosition is " + yPosition);
-       
         List<Image> inventoryColumn = inventoryMatrix[yPosition];
-        Debug.Log("Count of Array is " + inventoryColumn.Count);
         if (inventoryColumn.Count < maxInventoryItemsX){
             generatePreFabAtSpawnPosition(newInventoryItem, xPosition, yPosition);
             inventoryColumn.Add(newInventoryItem);
         }
-    } 
+        } 
 
         private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Vector3  spawnPosition, Quaternion swingRotation){
         GameObject gameObjectPrefab = Instantiate(prefabToUse, spawnPosition, swingRotation);
