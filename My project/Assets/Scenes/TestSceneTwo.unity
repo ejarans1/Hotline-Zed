@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4894,7 +4894,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 540451812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f880e45baf44db6bd6611fe5ee78fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f3c55fc4f442614ca036540896e1d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1348371474}
@@ -4912,7 +4912,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540451812}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -9152,7 +9152,7 @@ GameObject:
   - component: {fileID: 1045126205}
   - component: {fileID: 1045126204}
   - component: {fileID: 1045126202}
-  - component: {fileID: 1045126203}
+  - component: {fileID: 1045126207}
   m_Layer: 13
   m_Name: InventoryPickup (4)
   m_TagString: InventoryPickup
@@ -9188,25 +9188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 865275994}
---- !u!114 &1045126203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045126200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f880e45baf44db6bd6611fe5ee78fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1348371474}
-  inventoryUIHandler: {fileID: 1264329983}
-  interactRange: 1
-  itemLayers:
-    serializedVersion: 2
-    m_Bits: 8192
-  hasInteracted: 0
 --- !u!135 &1045126204
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9215,7 +9196,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045126200}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -9269,6 +9250,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045126200}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1045126207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045126200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3c55fc4f442614ca036540896e1d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1348371474}
+  inventoryUIHandler: {fileID: 1264329983}
+  interactRange: 1
+  itemLayers:
+    serializedVersion: 2
+    m_Bits: 8192
+  hasInteracted: 0
 --- !u!1 &1045882978
 GameObject:
   m_ObjectHideFlags: 0
@@ -9723,13 +9723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f880e45baf44db6bd6611fe5ee78fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1348371474}
-  inventoryUIHandler: {fileID: 1264329983}
-  interactRange: 1
-  itemLayers:
-    serializedVersion: 2
-    m_Bits: 8192
-  hasInteracted: 0
 --- !u!135 &1098022438
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -17713,7 +17706,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2002269446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f880e45baf44db6bd6611fe5ee78fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f3c55fc4f442614ca036540896e1d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1348371474}

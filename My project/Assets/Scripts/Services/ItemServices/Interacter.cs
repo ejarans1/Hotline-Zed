@@ -28,12 +28,26 @@ public class Interacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (progressionController.GetLevelClearedFlag() == true){
-            Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
-            foreach(Collider interactCollider in playerSphereColliders){
-                string pickUpTag  = determinePickUpType(interactCollider);
-                processPickupByTag(pickUpTag, interactCollider);
-            }
+        
+    }
+
+    // void FixedUpdate(){
+    //     if (progressionController.GetLevelClearedFlag() == true){
+    //         Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
+    //         foreach(Collider interactCollider in playerSphereColliders){
+    //             string pickUpTag  = determinePickUpType(interactCollider);
+    //             processPickupByTag(pickUpTag, interactCollider);
+    //         }
+    //     }
+    // }
+
+        void OnTriggerEnter(Collider other)
+    {
+        Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
+        foreach (Collider interactCollider in playerSphereColliders)
+        {
+            string pickUpTag = determinePickUpType(interactCollider);
+            processPickupByTag(pickUpTag, interactCollider);
         }
     }
 
