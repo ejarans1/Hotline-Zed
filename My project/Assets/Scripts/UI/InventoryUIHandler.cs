@@ -7,13 +7,17 @@ public class InventoryUIHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     public Image sampleSprite;
-    public Transform ParentPanel;
+    public RectTransform ParentPanel;
     public float inventoryWidth;
     public float inventoryHeight;
     public float maxInventoryItemsY;
     public float maxInventoryItemsX;
     private float inventoryTileHeight;
     private float inventoryTileWidth;
+
+    private float xStartingPosition;
+    private float yStartingPosition;
+
     private List<Image> inventoryItems;
     private int inventorySizeXAxis;
     private int inventorySizeYAxis;
@@ -40,6 +44,11 @@ public class InventoryUIHandler : MonoBehaviour
         inventoryPopulatedYPosition = 0;
         inventoryPopulatedXPosition = 0;
 
+        xStartingPosition = -300;
+        yStartingPosition = 400;
+
+
+
         inventoryMatrix = new List<List<Image>>();
 
         for (int columnsOfInventory = 0; columnsOfInventory < inventorySizeXAxis; columnsOfInventory++ ){
@@ -61,6 +70,14 @@ public class InventoryUIHandler : MonoBehaviour
 
     void FixedUpdate(){
         //populateSingleItemToInventory(sampleSprite);
+    }
+
+    public Vector3 getTopRightCorner()
+    {
+        Vector3[] v = new Vector3[4];
+        ParentPanel.GetLocalCorners(v);
+        return v[0];
+
     }
 
     private List<GameObject> searchForInventoryItemsInWorldSpace (){
@@ -133,7 +150,9 @@ public class InventoryUIHandler : MonoBehaviour
         float yOffset = calculateImageYPosition(yPosition);
         NewImage.sprite = imageToUse.sprite;
         NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
-        NewObj.transform.position = generatePositionWithOffset(ParentPanel.transform, xOffset, yOffset, 10);
+        Vector3 topRight = getTopRightCorner();
+        NewObj.transform.localPosition = generatePositionWizthOffset(topRight, xOffset, yOffset, 10);
+
         NewObj.SetActive(true); //Activate the GameObject
         return NewObj;
     }
@@ -153,10 +172,12 @@ public class InventoryUIHandler : MonoBehaviour
     
 
 
-    private Vector3 generatePositionWithOffset(Transform originalPosition, float xOffset, float yOffset, float zOffset){
-        float x = originalPosition.transform.position.x + xOffset;
-        float y = originalPosition.transform.position.y + yOffset;
-        float z = originalPosition.transform.position.z + zOffset;
+    private Vector3 generatePositionWizthOffset(Vector3 originalPosition, float xOffset, float yOffset, float zOffset){
+        float x = xStartingPosition + 100;
+        xStartingPosition = xStartingPosition + 100;
+        float y = yStartingPosition + 100;
+        yStartingPosition = yStartingPosition + 100;
+        float z = 0;
         return new Vector3(x,y,z);
     }
 
