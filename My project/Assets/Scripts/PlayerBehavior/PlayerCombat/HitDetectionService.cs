@@ -11,6 +11,8 @@ public class HitDetectionService : MonoBehaviour
     public GameObject xpOrbPrefab;
 
     public GameObject healthPickupPrefab;
+
+    public GameObject inventoryPickupPrefab;
  
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,10 @@ public class HitDetectionService : MonoBehaviour
                                                 this.gameObject.transform.position,
                                                 gameObject.transform.rotation);
             generatedHealthPickup.tag = "HealthPickup";
+            GameObject generatedInventoryPickup = generatePreFabAtSpawnPosition(inventoryPickupPrefab,
+                                                this.gameObject.transform.position,
+                                                gameObject.transform.rotation);
+            generatedInventoryPickup.tag = "InventoryPickup";
             Destroy(interactCollider.gameObject);
         }        
     }
