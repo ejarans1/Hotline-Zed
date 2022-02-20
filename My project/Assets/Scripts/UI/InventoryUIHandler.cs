@@ -44,8 +44,8 @@ public class InventoryUIHandler : MonoBehaviour
         inventoryPopulatedYPosition = 0;
         inventoryPopulatedXPosition = 0;
 
-        xStartingPosition = -300;
-        yStartingPosition = 400;
+        xStartingPosition = -1;
+        yStartingPosition = 0;
 
 
 
@@ -144,17 +144,18 @@ public class InventoryUIHandler : MonoBehaviour
     }
 
         private GameObject generatePreFabAtSpawnPosition(Image imageToUse, float xPosition, float yPosition){
-        GameObject NewObj = new GameObject(); //Create the GameObject
-        Image NewImage = NewObj.AddComponent<Image>();
-        float xOffset = calculateImageXPosition(xPosition);
-        float yOffset = calculateImageYPosition(yPosition);
-        NewImage.sprite = imageToUse.sprite;
-        NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
-        Vector3 topRight = getTopRightCorner();
-        NewObj.transform.localPosition = generatePositionWizthOffset(topRight, xOffset, yOffset, 10);
+            GameObject NewObj = new GameObject(); //Create the GameObject
+            Image NewImage = NewObj.AddComponent<Image>();
+            float xOffset = calculateImageXPosition(xPosition);
+            float yOffset = calculateImageYPosition(yPosition);
+            NewImage.sprite = imageToUse.sprite;
+            NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
+            Vector3 topRight = getTopRightCorner();
+            Debug.Log(topRight.ToString());
+            NewObj.transform.localPosition = generatePositionWizthOffset(topRight, xOffset, yOffset, 10);
 
-        NewObj.SetActive(true); //Activate the GameObject
-        return NewObj;
+            NewObj.SetActive(true); //Activate the GameObject
+            return NewObj;
     }
 
        private bool isInventoryRowMaxedOut(int rowToCheck){
@@ -169,14 +170,23 @@ public class InventoryUIHandler : MonoBehaviour
         return yPosition * 100; 
     }
 
+    private void generateNextPosition(){
+        if (yStartingPosition == 9){
+            Debug.Log("Last Y Position");    
+        }
+        if (xStartingPosition == 9){
+            xStartingPosition = -1;
+            yStartingPosition = yStartingPosition + 1;
+        }
+        xStartingPosition++;
     
+    }
 
 
     private Vector3 generatePositionWizthOffset(Vector3 originalPosition, float xOffset, float yOffset, float zOffset){
-        float x = xStartingPosition + 100;
-        xStartingPosition = xStartingPosition + 100;
-        float y = yStartingPosition + 100;
-        yStartingPosition = yStartingPosition + 100;
+        generateNextPosition();
+        float x = originalPosition.x + xStartingPosition * 100 + 50;
+        float y = originalPosition.y + yStartingPosition * 100 + 50;
         float z = 0;
         return new Vector3(x,y,z);
     }
