@@ -65,11 +65,11 @@ public class InventoryUIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        toggleInventoryPanel();
     }
 
     void FixedUpdate(){
-        //populateSingleItemToInventory(sampleSprite);
+
     }
 
     public Vector3 getTopRightCorner()
@@ -189,6 +189,12 @@ public class InventoryUIHandler : MonoBehaviour
         float y = originalPosition.y + yStartingPosition * 100 + 50;
         float z = 0;
         return new Vector3(x,y,z);
+    }
+
+    private void toggleInventoryPanel(){
+        if (Input.GetKeyDown (KeyCode.Tab)){
+            ParentPanel.gameObject.SetActive(!ParentPanel.gameObject.active);
+        }
     }
 
 }
