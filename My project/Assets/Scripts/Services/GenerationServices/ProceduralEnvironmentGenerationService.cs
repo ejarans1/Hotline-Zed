@@ -44,6 +44,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
             int currentYTilePosition = environmentTileTrackerService.getCurrentYTilePosition();
             environmentTileTrackerService.setMatrixValue(currentXTilePosition, currentYTilePosition);
             Vector3 spawnPosition = getSpawnPositions(currentTilePosition); 
+            Debug.Log("Current New Spawn Position Is: " + spawnPosition);
             generateNewPlatform(spawnPosition);
             moveGeneratedTile(generatedPrefab);
             activateEnemySpawners(generatedPrefab);
@@ -83,6 +84,7 @@ public class ProceduralEnvironmentGenerationService : MonoBehaviour
         while(!isValidFlag){
             proceduralPrefab = randomPrefabService.getRandomPrefab();
             generatedPrefab = generatePreFabAtSpawnPosition(proceduralPrefab, spawnPosition, currentTilePosition);
+            Debug.Log("Generating Till Successful, Position Is: " + generatedPrefab.transform.position);
             updateTileTrackerServiceForTilePosition(currentX, currentY);
             updateTileTrackerServiceMatrix(currentX, currentY);
             if (calculateValidPosition(currentX, currentY) == true){
