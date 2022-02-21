@@ -54,6 +54,14 @@ public class PlayerController : MonoBehaviour {
     
     
     void Update () {
+        // calculateInvisibleWallViolations();
+        // updatePlayerAnimation();
+        // applyForce();
+        // updatePlayerCameraPositionAndRotation();
+        // invisibleWallCheck();
+    }
+
+    void FixedUpdate(){
         calculateInvisibleWallViolations();
         updatePlayerAnimation();
         applyForce();
@@ -144,20 +152,20 @@ public class PlayerController : MonoBehaviour {
         Vector3 p_Velocity = new Vector3();
         if (Input.GetKey (KeyCode.W)){
             Vector3 cameraForward = cameraPosition.transform.forward;
-            playerRigidBody.AddForce(cameraForward);
+            playerRigidBody.AddForce(cameraForward*20);
         }
         if (Input.GetKey (KeyCode.S)){
             Vector3 cameraBackward = -cameraPosition.transform.forward;
-            playerRigidBody.AddForce(cameraBackward);
+            playerRigidBody.AddForce(cameraBackward*20);
         }
         if (Input.GetKey (KeyCode.A)){
             Vector3 cameraLeft = -cameraPosition.transform.right;
-            playerRigidBody.AddForce(cameraLeft);
+            playerRigidBody.AddForce(cameraLeft*20);
             
         }
         if (Input.GetKey (KeyCode.D)){
             Vector3 cameraRight = cameraPosition.transform.right;
-            playerRigidBody.AddForce(cameraRight);
+            playerRigidBody.AddForce(cameraRight*20);
         }
         return p_Velocity;
     }
