@@ -51,14 +51,18 @@ public class PlayerController : MonoBehaviour {
 
     public Transform weapon;
 
+    public AudioHandler audioHandler; 
+
     
     
     void Update () {
-        // calculateInvisibleWallViolations();
-        // updatePlayerAnimation();
-        // applyForce();
-        // updatePlayerCameraPositionAndRotation();
-        // invisibleWallCheck();
+        if (Input.GetKeyDown(KeyCode.W)) {
+             audioHandler.playFootSStepAudioSource();
+         }
+      
+         if (Input.GetKeyUp(KeyCode.W)) {
+             audioHandler.stopFootStepAudioSource();
+         }
     }
 
     void FixedUpdate(){

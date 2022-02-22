@@ -99,6 +99,8 @@
      <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\CharacterStatService.cs" />
      <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+     <Compile Include="Assets\Scripts\Audio\AudioHandler.cs" />
+     <Compile Include="Assets\Scripts\Audio\AudioPlayer.cs" />
      <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
