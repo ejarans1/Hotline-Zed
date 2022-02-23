@@ -26,24 +26,45 @@ public class HitDetectionService : MonoBehaviour
         Collider[] playerSphereColliders = Physics.OverlapSphere(this.gameObject.transform.position,
         interactRange,
         hitMarkerLayers);
-        foreach(Collider interactCollider in playerSphereColliders){
-            GameObject generatedXpOrb = generatePreFabAtSpawnPosition(xpOrbPrefab,
-                                                this.gameObject.transform.position,
-                                                gameObject.transform.rotation);
-            generatedXpOrb.tag = "XP";
-            GameObject generatedHealthPickup = generatePreFabAtSpawnPosition(healthPickupPrefab,
-                                                this.gameObject.transform.position,
-                                                gameObject.transform.rotation);
-            generatedHealthPickup.tag = "HealthPickup";
-            GameObject generatedInventoryPickup = generatePreFabAtSpawnPosition(inventoryPickupPrefab,
-                                                this.gameObject.transform.position,
-                                                gameObject.transform.rotation);
-            generatedInventoryPickup.tag = "InventoryPickup";
-            Destroy(interactCollider.gameObject);
+        foreach(Collider interactCollider in playerSphereColliders)
+        {
+            generateEnemyItemDrops(interactCollider);
         }        
     }
 
-     private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Vector3  spawnPosition, Quaternion swingRotation){
+    private void generateEnemyItemDrops(Collider interactCollider)
+    {
+        generateXPOrb();
+        generateHealthPickup();
+        generateInventoryPickup();
+        Destroy(interactCollider.gameObject);
+    }
+
+    private void generateInventoryPickup()
+    {
+        GameObject generatedInventoryPickup = generatePreFabAtSpawnPosition(inventoryPickupPrefab,
+            this.gameObject.transform.position,
+            gameObject.transform.rotation);
+        generatedInventoryPickup.tag = "InventoryPickup";
+    }
+
+    private void generateHealthPickup()
+    {
+        GameObject generatedHealthPickup = generatePreFabAtSpawnPosition(healthPickupPrefab,
+            this.gameObject.transform.position,
+            gameObject.transform.rotation);
+        generatedHealthPickup.tag = "HealthPickup";
+    }
+
+    private void generateXPOrb()
+    {
+        GameObject generatedXpOrb = generatePreFabAtSpawnPosition(xpOrbPrefab,
+            this.gameObject.transform.position,
+            gameObject.transform.rotation);
+        generatedXpOrb.tag = "XP";
+    }
+
+    private GameObject generatePreFabAtSpawnPosition(GameObject prefabToUse, Vector3  spawnPosition, Quaternion swingRotation){
         GameObject gameObjectPrefab = Instantiate(prefabToUse, spawnPosition, swingRotation);
         return gameObjectPrefab;
     }

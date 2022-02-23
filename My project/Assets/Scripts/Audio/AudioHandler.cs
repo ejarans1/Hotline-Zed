@@ -19,11 +19,11 @@ public class AudioHandler : MonoBehaviour
     }
 
     public void playFootStepAudioSource(){
-            if (!footStepAudioSource.isPlaying){
-                footStepAudioSource.Play();
-            } else {
-                footStepAudioSource.Stop();
-            }   
+        if (!footStepAudioSource.isPlaying){
+            footStepAudioSource.Play();
+        } else {
+            footStepAudioSource.Stop();
+        }   
     }
     
     public void playFootSStepAudioSource(){
