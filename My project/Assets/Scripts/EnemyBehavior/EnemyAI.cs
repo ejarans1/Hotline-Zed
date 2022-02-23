@@ -10,16 +10,22 @@ public class EnemyAI : MonoBehaviour
     public float MinDist = 5;
     public float interactRange;
     public LayerMask hitMarkerLayers;
+    public EnemyAudioHandler enemyAudioHandler;
+    public float attackRate;
+    public float nextAttack;
+    public bool recentlyAttacked;
 
-     public void Start () 
+     public void Start ()
      {
-     
+         attackRate = 10;
+         nextAttack = 0;
+         recentlyAttacked = false;
      }
  
      public void Update ()
      {
          performMovementStep();
-         detectEnemyAttackToPlayer();
+         performAttackStep();
      }
 
      private void performMovementStep()
@@ -28,6 +34,7 @@ public class EnemyAI : MonoBehaviour
 
          if (Vector3.Distance(transform.position, Player.position) >= MinDist &&
              Vector3.Distance(transform.position, Player.position) <= MaxDist)
+             enemyAudioHandler.playEnemyGrowlAudioSource();
          {
              transform.position += transform.forward * MoveSpeed * Time.deltaTime;
              if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
@@ -36,15 +43,40 @@ public class EnemyAI : MonoBehaviour
          }
      }
 
-     private void detectEnemyAttackToPlayer()
+     private void performAttackStep()
      {
-         Collider[] enemySphereColliders = Physics.OverlapSphere(this.gameObject.transform.position,
-             interactRange,
-             hitMarkerLayers);
-         foreach (Collider interactCollider in enemySphereColliders)
+         bool attackHit = detectEnemyAttackToPlayer();
+
+     }
+
+     private bool detectEnemyAttackToPlayer()
+     {
+         determineRecentlyAttackReset();
+         if (!recentlyAttacked)
          {
-             CharacterStatService characterStatService = interactCollider.gameObject.GetComponent<CharacterStatService>();
-             characterStatService.decrementHealthByAmount(10f);
+             Collider[] enemySphereColliders = Physics.OverlapSphere(this.gameObject.transform.position,
+                 interactRange,
+                 hitMarkerLayers);
+             foreach (Collider interactCollider in enemySphereColliders)
+             {
+                 enemyAudioHandler.playEnemyGrowlAudioSource();
+                 CharacterStatService characterStatService = interactCollider.gameObject.GetComponent<CharacterStatService>();
+                 characterStatService.decrementHealthByAmount(10f);
+                 recentlyAttacked = true;
+                 return true;
+             }
+         }
+
+         return false;
+     }
+
+     private void determineRecentlyAttackReset()
+     {
+         if (Time.time > nextAttack)
+         {
+             nextAttack = Time.time + attackRate;
+             recentlyAttacked = false;
+             Debug.Log("Reset Attack Timer");
          }
      }
 }
