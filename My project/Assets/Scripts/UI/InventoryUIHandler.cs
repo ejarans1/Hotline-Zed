@@ -145,7 +145,13 @@ public class InventoryUIHandler : MonoBehaviour
 
         private GameObject generatePreFabAtSpawnPosition(Image imageToUse, float xPosition, float yPosition){
             GameObject NewObj = new GameObject(); //Create the GameObject
+            Button newButton = NewObj.AddComponent<Button>();
+            ColorBlock colorVar = newButton.colors;
+            colorVar.highlightedColor = new Color(91, 192, 41);
+            newButton.colors = colorVar;
             Image NewImage = NewObj.AddComponent<Image>();
+            newButton.targetGraphic = NewImage;
+            
             float xOffset = calculateImageXPosition(xPosition);
             float yOffset = calculateImageYPosition(yPosition);
             NewImage.sprite = imageToUse.sprite;
@@ -153,8 +159,10 @@ public class InventoryUIHandler : MonoBehaviour
             Vector3 topRight = getTopRightCorner();
             Debug.Log(topRight.ToString());
             NewObj.transform.localPosition = generatePositionWizthOffset(topRight, xOffset, yOffset, 10);
+       
+            
 
-            NewObj.SetActive(true); //Activate the GameObject
+        NewObj.SetActive(true); //Activate the GameObject
             return NewObj;
     }
 
