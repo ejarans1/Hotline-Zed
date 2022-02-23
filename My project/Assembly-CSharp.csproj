@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,6 +52,9 @@
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UIHandlerService.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerCombat\WeaponSwingTracker.cs" />
@@ -104,7 +107,7 @@
     <Compile Include="Assets\Scripts\InteractlableItemModels\XpOrbData.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\Scripts\Audio\AudioHandler.cs" />
+    <Compile Include="Assets\Scripts\Audio\PlayerAudioHandler.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuService.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\CharacterStatService.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\Audio\EnemyAudioHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMPro.cginc" />

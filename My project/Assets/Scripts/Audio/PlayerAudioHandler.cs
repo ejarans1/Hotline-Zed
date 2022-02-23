@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioHandler : MonoBehaviour
+public class PlayerAudioHandler : MonoBehaviour
 {
 
     public AudioSource footStepAudioSource;
@@ -17,15 +17,6 @@ public class AudioHandler : MonoBehaviour
     {
         
     }
-
-    public void playFootStepAudioSource(){
-        if (!footStepAudioSource.isPlaying){
-            footStepAudioSource.Play();
-        } else {
-            footStepAudioSource.Stop();
-        }   
-    }
-    
     public void playFootSStepAudioSource(){
         if(!footStepAudioSource.isPlaying) {
             footStepAudioSource.Play();
