@@ -31,18 +31,7 @@ public class Interacter : MonoBehaviour
         
     }
 
-    // void FixedUpdate(){
-    //     if (progressionController.GetLevelClearedFlag() == true){
-    //         Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
-    //         foreach(Collider interactCollider in playerSphereColliders){
-    //             string pickUpTag  = determinePickUpType(interactCollider);
-    //             processPickupByTag(pickUpTag, interactCollider);
-    //         }
-    //     }
-    // }
-
-        void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other) {
         Collider[] playerSphereColliders = Physics.OverlapSphere(player.position, interactRange, itemLayers);
         foreach (Collider interactCollider in playerSphereColliders)
         {
@@ -78,13 +67,17 @@ public class Interacter : MonoBehaviour
             Destroy(interactCollider.gameObject);
 
         }
-        if (pickUpTag == "InventoryPickup"){
-            Debug.Log(interactCollider.name);
-            InventoryItem inventoryItem = interactCollider.gameObject.GetComponent<InventoryItem>();
-            Image inventorySprite = inventoryItem.getSpriteImage();
-            inventoryUIHandler.populateSingleItemToInventory(inventorySprite);
-            Destroy(interactCollider.gameObject);
+        if (pickUpTag == "InventoryPickup") { 
+            handleInventoryPickup(interactCollider);
         }
+    }
+
+    private void handleInventoryPickup(Collider interactCollider)
+    {
+        InventoryItem inventoryItem = interactCollider.gameObject.GetComponent<InventoryItem>();
+        Image inventorySprite = inventoryItem.getSpriteImage();
+        inventoryUIHandler.populateSingleItemToInventory(inventorySprite);
+        Destroy(interactCollider.gameObject);
     }
 
     public void setHasInteracted(bool valueToSet){
@@ -102,7 +95,6 @@ public class Interacter : MonoBehaviour
 
     public void setLayerMask(){
         itemLayers = LayerMask.GetMask("interactableItemLayer");
-        
     }
 
  
