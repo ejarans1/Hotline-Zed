@@ -57,9 +57,10 @@ public class EnemySpawnerService : MonoBehaviour
     }
 
     private GameObject spawnNewEnemy(Transform spawnPoint) {
-    
-        return Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-        
+        GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        enemy.active = true;
+        return enemy;
+
     }
 
     private void determineRecentlyAttackReset()
