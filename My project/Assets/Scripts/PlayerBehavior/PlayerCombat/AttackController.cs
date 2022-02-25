@@ -26,6 +26,11 @@ public class AttackController : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos()
+    { 
+        Gizmos.DrawWireSphere(attackPoint.position, 0.25f);
+    }
+
     private int getBaseInputForMouse() {
         if(Input.GetKey(KeyCode.Mouse0)){
             return 0;
@@ -40,7 +45,9 @@ public class AttackController : MonoBehaviour
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
             foreach(Collider enemy in hitEnemies){
                 print("We hit" + enemy.name);
-                Destroy(enemy.gameObject);
+                Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
+                rigidbody.AddForce(-enemy.gameObject.transform.forward * 5000000);
+                //Destroy(enemy.gameObject);
             }
     } 
 

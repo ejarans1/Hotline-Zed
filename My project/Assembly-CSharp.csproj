@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\CharacterStatService.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Audio\EnemyAudioHandler.cs" />
+    <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAnimationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMPro.cginc" />

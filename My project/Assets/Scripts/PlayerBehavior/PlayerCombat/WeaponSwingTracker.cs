@@ -50,7 +50,7 @@ public class WeaponSwingTracker : MonoBehaviour
             }
         }
         if (handleSwingModeFlag){
-            handleSwingMode(enemy, swingLineSpawnStartandLimit);
+            //handleSwingMode(enemy, swingLineSpawnStartandLimit);
         }
         
     }
