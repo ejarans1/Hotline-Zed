@@ -76,6 +76,11 @@ public class EnemyAI : MonoBehaviour
          return false;
      }
 
+     private void enemyAnimationControllerCommand()
+     {
+
+     }
+
      private void determineRecentlyAttackReset()
      {
          if (Time.time > nextAttack)

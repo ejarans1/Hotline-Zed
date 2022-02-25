@@ -50,8 +50,6 @@ public class AttackController : MonoBehaviour
                 enemyAnimationController.stopEnemyAnimationCommand();
                 print("We hit" + enemy.name);
                 Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
-                //rigidbody.AddForce(-enemy.gameObject.transform.forward * 5000000);
-                //Destroy(enemy.gameObject);
             }
     } 
 
