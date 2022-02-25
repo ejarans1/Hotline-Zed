@@ -14,18 +14,24 @@ public class EnemyAI : MonoBehaviour
     public float attackRate;
     public float nextAttack;
     public bool recentlyAttacked;
+    public bool alive;
 
      public void Start ()
      {
          attackRate = 10;
          nextAttack = 0;
          recentlyAttacked = false;
+         alive = true;
      }
  
      public void Update ()
      {
-         performMovementStep();
-         performAttackStep();
+         if (alive)
+         {
+             performMovementStep();
+             performAttackStep();
+        }
+         
      }
 
      private void performMovementStep()
@@ -78,5 +84,10 @@ public class EnemyAI : MonoBehaviour
              recentlyAttacked = false;
              Debug.Log("Reset Attack Timer");
          }
+     }
+
+     public void setAlive(bool aliveValue)
+     {
+         alive = aliveValue;
      }
 }

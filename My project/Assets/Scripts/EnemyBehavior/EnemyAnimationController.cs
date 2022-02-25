@@ -19,8 +19,16 @@ public class EnemyAnimationController : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+        /*stopCurrentAnimation();
+        setChildrenRigidBodyKinematicToFalse();
+        stopMovement();*/
+    }
+
+    public void stopEnemyAnimationCommand()
+    {
         stopCurrentAnimation();
         setChildrenRigidBodyKinematicToFalse();
+        stopMovement();
     }
 
     private void stopCurrentAnimation()
@@ -34,6 +42,12 @@ public class EnemyAnimationController : MonoBehaviour
         {
             rigidbody.isKinematic = false;
         }
+    }
+
+    private void stopMovement()
+    {
+        EnemyAI enemnAiHandler = this.gameObject.GetComponent<EnemyAI>();
+        enemnAiHandler.setAlive(false);
     }
 
 

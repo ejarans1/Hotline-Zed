@@ -104,10 +104,12 @@
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerCombat\AttackController.cs" />
+    <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAnimationController.cs" />
     <Compile Include="Assets\Scripts\InteractlableItemModels\XpOrbData.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\Audio\PlayerAudioHandler.cs" />
+    <Compile Include="Assets\Scripts\Audio\EnemyAudioHandler.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuService.cs" />
@@ -121,8 +123,6 @@
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\CharacterStatService.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Scripts\Audio\EnemyAudioHandler.cs" />
-    <Compile Include="Assets\Scripts\EnemyBehavior\EnemyAnimationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMPro.cginc" />
