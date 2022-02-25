@@ -45,11 +45,12 @@ public class AttackController : MonoBehaviour
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
             foreach(Collider enemy in hitEnemies)
             {
-                EnemyAnimationController enemyAnimationController = enemy.gameObject.GetComponent<EnemyAnimationController>();
+                Debug.Log(enemy.ToString());
+                EnemyAnimationController enemyAnimationController = enemy.gameObject.GetComponentInParent<EnemyAnimationController>();
                 enemyAnimationController.stopEnemyAnimationCommand();
                 print("We hit" + enemy.name);
                 Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
-                rigidbody.AddForce(-enemy.gameObject.transform.forward * 5000000);
+                //rigidbody.AddForce(-enemy.gameObject.transform.forward * 5000000);
                 //Destroy(enemy.gameObject);
             }
     } 
