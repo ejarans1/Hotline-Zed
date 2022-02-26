@@ -28,16 +28,16 @@ public class HitDetectionService : MonoBehaviour
         hitMarkerLayers);
         foreach(Collider interactCollider in playerSphereColliders)
         {
-            generateEnemyItemDrops(interactCollider);
+            generateEnemyItemDrops();
         }        
     }
 
-    private void generateEnemyItemDrops(Collider interactCollider)
+    public void generateEnemyItemDrops()
     {
         generateXPOrb();
         generateHealthPickup();
         generateInventoryPickup();
-        Destroy(interactCollider.gameObject);
+        
     }
 
     private void generateInventoryPickup()

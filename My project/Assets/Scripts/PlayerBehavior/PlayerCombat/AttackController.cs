@@ -10,6 +10,7 @@ public class AttackController : MonoBehaviour
     public Transform meleeWeaponPosition;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+    public HitDetectionService hitDetectionService;
 
     void Update(){
 
@@ -50,8 +51,11 @@ public class AttackController : MonoBehaviour
                 enemyAnimationController.stopEnemyAnimationCommand();
                 print("We hit" + enemy.name);
                 Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
+                hitDetectionService.generateEnemyItemDrops();
             }
     } 
+
+
 
      
 }

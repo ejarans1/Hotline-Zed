@@ -6,8 +6,8 @@ public class EnemyAI : MonoBehaviour
 {
     public Transform Player;
     public float MoveSpeed = 4;
-    public float MaxDist = 10;
-    public float MinDist = 5;
+    public float MaxDist = 20;
+    public float MinDist = 1;
     public float interactRange;
     public LayerMask hitMarkerLayers;
     public EnemyAudioHandler enemyAudioHandler;
@@ -37,16 +37,13 @@ public class EnemyAI : MonoBehaviour
      private void performMovementStep()
      {
          transform.LookAt(Player);
-
          if (Vector3.Distance(transform.position, Player.position) >= MinDist &&
              Vector3.Distance(transform.position, Player.position) <= MaxDist)
-             enemyAudioHandler.playEnemyGrowlAudioSource();
          {
+             enemyAudioHandler.playEnemyGrowlAudioSource();
              transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-             if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
-             {
-             }
          }
+             
      }
 
      private void performAttackStep()
