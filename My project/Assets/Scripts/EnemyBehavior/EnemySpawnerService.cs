@@ -15,15 +15,15 @@ public class EnemySpawnerService : MonoBehaviour
 
     public bool isActive = false;
 
-    public float attackRate;
-    public float nextAttack;
+    public float spawnRate;
+    public float nextSpawn;
     public bool recentlyAttacked;
 
     // Start is called before the first frame update
     void Start()
     {
-        attackRate = 10;
-        nextAttack = 0;
+        spawnRate = 1;
+        nextSpawn = 0;
         recentlyAttacked = false;
     }
 
@@ -65,9 +65,9 @@ public class EnemySpawnerService : MonoBehaviour
 
     private void determineRecentlyAttackReset()
     {
-        if (Time.time > nextAttack)
+        if (Time.time > nextSpawn)
         {
-            nextAttack = Time.time + attackRate;
+            nextSpawn = Time.time + spawnRate;
             recentlyAttacked = false;
             Debug.Log("Reset Attack Timer");
         }
