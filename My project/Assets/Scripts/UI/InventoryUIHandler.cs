@@ -79,10 +79,12 @@ public class InventoryUIHandler : MonoBehaviour
     private  Button configureButtonForInventoryInteraction(GameObject newObj)
     {
         Button newButton = newObj.AddComponent<Button>();
+        ButtonInteractor buttonInteractor = newObj.AddComponent<ButtonInteractor>();
+        buttonInteractor.setCharacterStatService(characterStatService);
         ColorBlock colorVar = newButton.colors;
         colorVar.highlightedColor = new Color(91, 192, 41);
         newButton.colors = colorVar;
-        newButton.onClick.AddListener(delegate { characterStatService.incrementHealthByAmount(10); });
+        newButton.onClick.AddListener(delegate { buttonInteractor.characterStatServiceCommand(); });
         return newButton;
     }
 
@@ -156,6 +158,11 @@ public class InventoryUIHandler : MonoBehaviour
         parentPanel.GetLocalCorners(v);
         return v[0];
 
+    }
+
+    private void characterStatServiceCommand()
+    {
+        characterStatService.decrementHealthByAmount(10);
     }
 
 }
