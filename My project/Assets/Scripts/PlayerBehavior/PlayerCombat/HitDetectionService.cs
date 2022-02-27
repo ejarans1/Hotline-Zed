@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class HitDetectionService : MonoBehaviour
 {
@@ -28,19 +29,19 @@ public class HitDetectionService : MonoBehaviour
         hitMarkerLayers);
         foreach(Collider interactCollider in playerSphereColliders)
         {
-            generateEnemyItemDrops();
+            generateEnemyItemDrops(interactCollider.transform.position);
         }        
     }
 
-    public void generateEnemyItemDrops()
+    public void generateEnemyItemDrops(Vector3 spawnPosition)
     {
-        generateXPOrb();
-        generateHealthPickup();
-        generateInventoryPickup();
+        generateXPOrb(spawnPosition);
+        generateHealthPickup(spawnPosition);
+        generateInventoryPickup(spawnPosition);
         
     }
 
-    private void generateInventoryPickup()
+    private void generateInventoryPickup(Vector3 spawnPosition)
     {
         GameObject generatedInventoryPickup = generatePreFabAtSpawnPosition(inventoryPickupPrefab,
             this.gameObject.transform.position,
@@ -48,7 +49,7 @@ public class HitDetectionService : MonoBehaviour
         generatedInventoryPickup.tag = "InventoryPickup";
     }
 
-    private void generateHealthPickup()
+    private void generateHealthPickup(Vector3 spawnPosition)
     {
         GameObject generatedHealthPickup = generatePreFabAtSpawnPosition(healthPickupPrefab,
             this.gameObject.transform.position,
@@ -56,7 +57,7 @@ public class HitDetectionService : MonoBehaviour
         generatedHealthPickup.tag = "HealthPickup";
     }
 
-    private void generateXPOrb()
+    private void generateXPOrb(Vector3 spawnPosition)
     {
         GameObject generatedXpOrb = generatePreFabAtSpawnPosition(xpOrbPrefab,
             this.gameObject.transform.position,

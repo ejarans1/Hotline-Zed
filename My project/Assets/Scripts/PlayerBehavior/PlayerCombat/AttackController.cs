@@ -44,14 +44,22 @@ public class AttackController : MonoBehaviour
 
     public void attack(){
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+            int numberOfAttacksPerformed = 0;
             foreach(Collider enemy in hitEnemies)
             {
-                Debug.Log(enemy.ToString());
-                EnemyAnimationController enemyAnimationController = enemy.gameObject.GetComponentInParent<EnemyAnimationController>();
-                enemyAnimationController.stopEnemyAnimationCommand();
-                print("We hit" + enemy.name);
-                Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
-                hitDetectionService.generateEnemyItemDrops();
+                if (numberOfAttacksPerformed == 0)
+                {
+                    Debug.Log(enemy.ToString());
+                    EnemyAnimationController enemyAnimationController = enemy.gameObject.GetComponentInParent<EnemyAnimationController>();
+                    enemyAnimationController.stopEnemyAnimationCommand();
+                    print("We hit" + enemy.name);
+                    Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
+                    hitDetectionService.generateEnemyItemDrops(enemy.transform.position);
+                    numberOfAttacksPerformed++;
+                }
+
+                
+
             }
     } 
 

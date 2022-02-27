@@ -13,6 +13,8 @@ public class InventoryUIHandler : MonoBehaviour
     public float inventoryHeight;
     public float maxInventoryItemsY;
     public float maxInventoryItemsX;
+    public CharacterStatService characterStatService;
+
 
     private float xStartingPosition;
     private float yStartingPosition;
@@ -64,7 +66,7 @@ public class InventoryUIHandler : MonoBehaviour
         return inventoryItem;
     }
 
-    private static GameObject initializeInventoryItemWithImageAndButton(Image imageToUse)
+    private GameObject initializeInventoryItemWithImageAndButton(Image imageToUse)
     {
         GameObject inventoryItem = new GameObject();
         Button newButton = configureButtonForInventoryInteraction(inventoryItem);
@@ -74,12 +76,13 @@ public class InventoryUIHandler : MonoBehaviour
         return inventoryItem;
     }
 
-    private static Button configureButtonForInventoryInteraction(GameObject newObj)
+    private  Button configureButtonForInventoryInteraction(GameObject newObj)
     {
         Button newButton = newObj.AddComponent<Button>();
         ColorBlock colorVar = newButton.colors;
         colorVar.highlightedColor = new Color(91, 192, 41);
         newButton.colors = colorVar;
+        newButton.onClick.AddListener(delegate { characterStatService.incrementHealthByAmount(10); });
         return newButton;
     }
 
