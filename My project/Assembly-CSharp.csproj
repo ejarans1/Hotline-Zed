@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,9 +53,6 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UIHandlerService.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerCombat\WeaponSwingTracker.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\XPService.cs" />
@@ -74,6 +71,7 @@
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonInteractor.cs" />
     <Compile Include="Assets\Scripts\Services\GenerationServices\EnvironmentTileMover.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Services\ItemServices\RandomPrefabService.cs" />
@@ -123,7 +121,6 @@
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior\PlayerStats\CharacterStatService.cs" />
     <Compile Include="Assets\UIAssets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Scripts\UI\ButtonInteractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UIAssets\TextMesh Pro\Shaders\TMPro.cginc" />
