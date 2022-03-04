@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AttackController : MonoBehaviour
+{
+    
+    public Transform attackPoint;
+
+    public Transform meleeWeaponPosition;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+    public HitDetectionService hitDetectionService;
+
+    void Update(){
+
+    }
+
+    private void performSwingProcedure(){
+        int MouseButtonInput = getBaseInputForMouse();
+    
+        if(MouseButtonInput == 0){
+           //
+        }
+        if(MouseButtonInput == 1){
+            //Do Nothing
+        }
+    }
+
+    void OnDrawGizmos()
+    { 
+        Gizmos.DrawWireSphere(attackPoint.position, 0.25f);
+    }
+
+    private int getBaseInputForMouse() {
+        if(Input.GetKey(KeyCode.Mouse0)){
+            return 0;
+        }
+        if(Input.GetKey(KeyCode.Mouse1)){
+            return 1;
+        }
+        return -1;
+    }
+
+    public void attack(){
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+            int numberOfAttacksPerformed = 0;
+            foreach(Collider enemy in hitEnemies)
+            {
+                if (numberOfAttacksPerformed == 0)
+                {
+                    Debug.Log(enemy.ToString());
+                    EnemyAnimationController enemyAnimationController = enemy.gameObject.GetComponentInParent<EnemyAnimationController>();
+                    enemyAnimationController.stopEnemyAnimationCommand();
+                    print("We hit" + enemy.name);
+                    Rigidbody rigidbody = enemy.gameObject.GetComponent<Rigidbody>();
+                    hitDetectionService.generateEnemyItemDrops(enemy.transform.position);
+                    numberOfAttacksPerformed++;
+                }
+
+                
+
+            }
+    } 
+
+
+
+     
+}
